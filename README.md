@@ -2,7 +2,7 @@
 
 CodePath WEB103 Final Project
 
-Designed and developed by: Yash Patki, Chibueze Anyanwu
+Designed and developed by: Yash Patki
 
 🔗 Link to deployed app:
 
