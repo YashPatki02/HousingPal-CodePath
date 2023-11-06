@@ -24,19 +24,22 @@ As a result, this idea addresses a tangible issue that many college students fac
 
 ## Tech Stack
 
-Frontend:
+Frontend: React.js, AntDesign, Formik, Yup
 
-Backend:
+Backend: Node.js, Express.js, Passport.js, PostgreSQL
 
 ## Features
 
 ### 1. Users can Create an Account
 
-- [ ] Users can create an account using their school email address and password. 
+- [ ] Users can create an account using their school email address and password (``Register`` page).
+- [ ] Users can login using their school email address and password (``Login`` page).
+- [ ] Users can logout of their account (``Logout`` button in User Profile page).
+- [ ] Users can update their profile information in the ``User Profile`` page.
 
 [gif goes here]
 
-### 2. Users (Tenants) can Post a Listing
+### 2. Users (Tenants) can Post a Listing for a Lease/Sublease
 
 - [ ] Users can post a listing for a sublet/sublease or lease/roomate.
 - [ ] Each Sublease/Lease listing includes:
@@ -49,6 +52,9 @@ Backend:
   - [ ] Pictures of the property
   - [ ] Contact information
   - [ ] Other details
+- [ ] Users can edit/delete their own listings.
+- [ ] All users can view all listings.
+- [ ] Users can filter through listings based on preferences/criteria.
 
 
 [gif goes here]
@@ -65,6 +71,9 @@ Backend:
   - [ ] Image of the user
   - [ ] Contact information
   - [ ] Other details
+- [ ] Users can edit/delete their own profiles.
+- [ ] All users can view all profiles.
+- [ ] Users can filter through profiles based on preferences/criteria.
 
 [gif goes here]
 
@@ -90,6 +99,28 @@ Backend:
 - [ ] Users can create, read, update, and delete Listings and Profiles.
 
 [gif goes here]
+
+### 7. Users can view their own Listings and Profiles in their User Profile page
+
+- [ ] Users can view their own Listings and Profiles in their ``User Profile`` page.
+
+[gif goes here]
+
+### 8. Users can favorite Listings and Profiles
+
+- [ ] Users can favorite Listings and Profiles.
+- [ ] Users can view their favorited Listings and Profiles in the ``Favorites`` page.
+
+[gif goes here]
+
+### 9. All data is persisted in a PostgreSQL database using Railway
+
+- ✅ Create and connect to a PostgreSQL database using Railway.
+- [ ] All data is persisted in a PostgreSQL database using Railway.
+- [ ] API routes are setup in the backend to handle CRUD operations.
+
+Server Setup:
+![Server Setup]('../../gifs/server-setup.gif)
 
 ## Installation Instructions
 

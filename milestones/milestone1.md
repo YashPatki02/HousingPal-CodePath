@@ -27,10 +27,7 @@ each other accountable and divide up tasks based on our preferences/skills.
 
 ### 2. What were some challenges your group faced in this unit?
 
-We had some issues analyzing the scope of this project, as there are some features
-that we may not be able to complete within the given time frame. However, we 
-decided to write them down to focus on the core, required features first and then
-move on to the additional features if we have time.
+We had some issues analyzing the scope of this project, as there are some features that we may not be able to complete within the given time frame. However, we decided to write them down to focus on the core, required features first and then move on to the additional features if we have time.
 
 Outside of the project, we had some issues with our personal schedules and 
 school work, but we were able to find time to work on the project individually
@@ -38,7 +35,4 @@ and meet up to discuss our progress.
 
 ### 3. What additional support will you need in upcoming units as you continue to work on your final project?
 
-We may need support for drawing out the backend architecture to build the database
-and connect it to the frontend. We may also need support for deploying the app and 
-allowing users to create an account with the school email. We will need to look 
-into how to do this and may need some help with it.
+We may need support for drawing out the backend architecture to build the database and connect it to the frontend. We may also need support for deploying the app and allowing users to create an account with the school email. We will need to look into how to do this and may need some help with it.
