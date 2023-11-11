@@ -25,7 +25,7 @@ function App() {
     const API_URL = "http://localhost:3001";
 
     const [user, setUser] = useState({
-        id: "1",
+        id: 1,
         githubId: "68520117",
         username: "YashPatki02",
         avatarurl: "https://avatars.githubusercontent.com/u/68520117?v=4",
@@ -110,7 +110,7 @@ function App() {
                 ),
         },
         {
-            path: "/listing/:id/edit",
+            path: "/listing/edit/:id",
             element:
                 user && user.id ? (
                     <ListingEdit api_url={API_URL} user={user} />
@@ -119,16 +119,7 @@ function App() {
                 ),
         },
         {
-            path: "/tenee/:id/edit",
-            element:
-                user && user.id ? (
-                    <TeneeEdit api_url={API_URL} user={user} />
-                ) : (
-                    <Login api_url={API_URL} />
-                ),
-        },
-        {
-            path: "/tenee/:id/edit",
+            path: "/tenee/edit/:id",
             element:
                 user && user.id ? (
                     <TeneeEdit api_url={API_URL} user={user} />

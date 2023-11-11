@@ -2,6 +2,7 @@ import React from "react";
 
 const LeaseTile = ({ listing }) => {
     const {
+        id,
         listing_type,
         tenant_names,
         room_setup,
@@ -19,9 +20,14 @@ const LeaseTile = ({ listing }) => {
         pictures,
     } = listing;
 
+    const goToListing = (id) => () => {
+        window.location.href = `/listing/${id}`;
+    }
+
     return (
         <div className="lease-tile">
-            <h2>{listing_type} Listing</h2>
+            <h2>{listing_type} Listing</h2> 
+            <button onClick={goToListing(id)}>View Listing Details</button>
             <p>Tenants: {tenant_names}</p>
             <p>Room Setup: {room_setup}</p>
             <p>Appliances: {appliances}</p>

@@ -38,8 +38,8 @@ const CreateListing = ({ user, api_url }) => {
         deal_breakers: Yup.string(),
         location: Yup.string().required("Required"),
         rent: Yup.number().required("Required").min(1),
-        utilities: Yup.number().min(0),
-        lease_length: Yup.number().required("Required").min(1),
+        utilities: Yup.number().min(0).required("Required").min(0),
+        lease_length: Yup.string().required("Required"),
         start_date: Yup.date().required("Required"),
     });
 
@@ -50,8 +50,6 @@ const CreateListing = ({ user, api_url }) => {
             user_id: parseInt(user.id),
             ...values,
         }
-
-        console.log(credentials)
 
         const response = await LeaseAPI.createLeaseListing(credentials);
         console.log(response);

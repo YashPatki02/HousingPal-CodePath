@@ -54,6 +54,7 @@ const createLeaseListing = async (credentials) => {
 
 const updateLeaseListing = async (credentials) => {
     const {
+        id,
         room_setup,
         appliances,
         amenities,
@@ -73,6 +74,7 @@ const updateLeaseListing = async (credentials) => {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+            id,
             room_setup,
             appliances,
             amenities,
@@ -90,7 +92,7 @@ const updateLeaseListing = async (credentials) => {
     };
 
     try {
-        const response = await fetch(`${API_URL}/${credentials.id}`, options);
+        const response = await fetch(`${API_URL}/${id}`, options);
         const data = await response.json();
 
         return data;

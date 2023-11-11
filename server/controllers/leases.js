@@ -57,8 +57,8 @@ const createLeaseListing = async (req, res) => {
 };
 
 const updateLeaseListing = async (req, res) => {
-    const { listingId } = req.params.id;
     const {
+        id,
         room_setup,
         appliances,
         amenities,
@@ -73,6 +73,9 @@ const updateLeaseListing = async (req, res) => {
         start_date,
         pictures
     } = req.body;
+
+    console.log(req.body)
+
 
     try {
         const results = await pool.query(
@@ -96,7 +99,7 @@ const updateLeaseListing = async (req, res) => {
                 lease_length,
                 start_date,
                 pictures,
-                listingId,
+                id,
             ]
         );
         res.status(201).json(results.rows[0]);
@@ -106,19 +109,22 @@ const updateLeaseListing = async (req, res) => {
 };
 
 const deleteLeaseListing = async (req, res) => {
-    const { listingId } = req.params.id;
+    const listingId  = req.params.id;
 
     try {
         const results = await pool.query(`DELETE FROM listings WHERE id = $1`, [
             listingId,
         ]);
+
+        res.status(201).json(results.rowCount);
+
     } catch (error) {
         res.status(409).json({ error: error.message });
     }
 };
 
 const getLeaseListingById = async (req, res) => {
-    const { listingId } = req.params.id;
+    const listingId  = parseInt(req.params.id);
 
     try {
         const results = await pool.query(
