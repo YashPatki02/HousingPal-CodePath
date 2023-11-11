@@ -1,5 +1,3 @@
-import simpleFetch from "./simpleFetch.js";
-
 const API_URL = "/api/users";
 
 const signup = async (credentials) => {
@@ -23,8 +21,9 @@ const signup = async (credentials) => {
         }),
     };
 
-    const response = await simpleFetch(`${API_URL}/`, options);
-    return response.json();
+    const response = await fetch(`${API_URL}/signup`, options);
+    const data = await response.json();
+    return data;
 };
 
 const updateProfile = async (credentials) => {
@@ -54,12 +53,16 @@ const updateProfile = async (credentials) => {
     };
 
     try {
-        const response = await simpleFetch(
-            `${API_URL}/${credentials.id}`,
-            options
-        );
-        return response;
+        const response = await fetch(`${API_URL}/`, options);
+        const data = await response.json();
+        return data;
     } catch (error) {
         throw error;
     }
 };
+
+export default {
+    signup,
+    updateProfile,
+};
+

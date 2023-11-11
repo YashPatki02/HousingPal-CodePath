@@ -116,7 +116,7 @@ Backend: Node.js, Express.js, Passport.js, PostgreSQL
 ### 9. All data is persisted in a PostgreSQL database using Railway
 
 - ✅ Create and connect to a PostgreSQL database using Railway.
-- [ ] All data is persisted in a PostgreSQL database using Railway.
+- ✅ All data is persisted in a PostgreSQL database using Railway.
 - [ ] API routes are setup in the backend to handle CRUD operations.
 
 Server Setup:

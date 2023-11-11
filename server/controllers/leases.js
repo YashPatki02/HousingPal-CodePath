@@ -51,6 +51,7 @@ const createLeaseListing = async (req, res) => {
         );
         res.status(201).json(results.rows[0]);
     } catch (error) {
+        console.log(error);
         res.status(409).json({ error: error.message });
     }
 };

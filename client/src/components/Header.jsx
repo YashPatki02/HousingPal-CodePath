@@ -8,13 +8,14 @@ import {
 } from "@ant-design/icons";
 import { useNavigate } from "react-router";
 
-const Header = () => {
-
+const Header = ({ logout, user }) => {
     const navigate = useNavigate();
+
+    const { id } = user;
 
     const navigateTo = (path) => {
         navigate(path);
-    }
+    };
 
     return (
         <>
@@ -43,25 +44,44 @@ const Header = () => {
                             color: "white",
                         }}
                     >
-                        <Menu.Item key="1" icon={<HomeOutlined />} onClick={() => {
-                            navigateTo("/");
-                        }}>
+                        <Menu.Item
+                            key="1"
+                            icon={<HomeOutlined />}
+                            onClick={() => {
+                                navigateTo("/");
+                            }}
+                        >
                             Leases
                         </Menu.Item>
-                        <Menu.Item key="2" icon={<TeamOutlined />} onClick={() => {
-                            navigateTo("/tenees");
-                        }}>
+                        <Menu.Item
+                            key="2"
+                            icon={<TeamOutlined />}
+                            onClick={() => {
+                                navigateTo("/tenees");
+                            }}
+                        >
                             Tenees
                         </Menu.Item>
-                        <Menu.Item key="3" icon={<StarOutlined />} onClick={() => {
-                            navigateTo("/favorites");
-                        }}>
+                        <Menu.Item
+                            key="3"
+                            icon={<StarOutlined />}
+                            onClick={() => {
+                                navigateTo(`user/${id}/favorites`);
+                            }}
+                        >
                             Favorites
                         </Menu.Item>
-                        <Menu.Item key="4" icon={<UserOutlined />} onClick={() => {
-                            navigateTo("/user/0");
-                        }}>
+                        <Menu.Item
+                            key="4"
+                            icon={<UserOutlined />}
+                            onClick={() => {
+                                navigateTo("/user/0");
+                            }}
+                        >
                             Profile
+                        </Menu.Item>
+                        <Menu.Item key="5" onClick={logout}>
+                            Logout
                         </Menu.Item>
                     </Menu>
                 </Col>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import LeasesAPI from "../../services/leases.js";
-import LeaseTile from '../../components/LeaseTile'
+import LeaseTile from "../../components/LeaseTile";
+import { Link } from "react-router-dom";
 
 const ListingsPage = () => {
     const [listings, setListings] = useState([]);
@@ -9,14 +10,14 @@ const ListingsPage = () => {
     const fetchListings = async () => {
         try {
             const response = await LeasesAPI.getAllLeaseListings();
-            setListings(response); 
+            setListings(response);
         } catch (error) {
             console.error("Error fetching listings: ", error);
         }
     };
 
     useEffect(() => {
-        fetchListings(); 
+        fetchListings();
     }, []);
 
     return (
@@ -27,6 +28,7 @@ const ListingsPage = () => {
                     <LeaseTile key={listing.id} listing={listing} />
                 ))}
             </div>
+            <Link to="/listing/create">Create Listing</Link>
         </div>
     );
 };

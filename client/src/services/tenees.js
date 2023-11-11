@@ -1,5 +1,3 @@
-import simpleFetch from "./simpleFetch.js";
-
 const API_URL = "/api/tenees";
 
 const createTeneesProfile = async (credentials) => {
@@ -34,8 +32,9 @@ const createTeneesProfile = async (credentials) => {
     };
 
     try {
-        const response = await simpleFetch(`${API_URL}/`, options);
-        return response;
+        const response = await fetch(`${API_URL}/`, options);
+        const data = await response.json();
+        return data;
     } catch (error) {
         throw error;
     }
@@ -70,11 +69,10 @@ const updateTeneesProfile = async (credentials) => {
     };
 
     try {
-        const response = await simpleFetch(
-            `${API_URL}/${credentials.id}`,
-            options
-        );
-        return response;
+        const response = await fetch(`${API_URL}/${credentials.id}`, options);
+        const data = await response.json();
+
+        return data;
     } catch (error) {
         throw error;
     }
@@ -86,8 +84,9 @@ const deleteTeneesProfile = async (id) => {
     };
 
     try {
-        const response = await simpleFetch(`${API_URL}/${id}`, options);
-        return response;
+        const response = await fetch(`${API_URL}/${id}`, options);
+        const data = await response.json();
+        return data;
     } catch (error) {
         throw error;
     }
@@ -95,8 +94,10 @@ const deleteTeneesProfile = async (id) => {
 
 const getTeneesProfileById = async (id) => {
     try {
-        const response = await simpleFetch(`${API_URL}/${id}`);
-        return response;
+        const response = await fetch(`${API_URL}/${id}`);
+        const data = await response.json();
+
+        return data;
     } catch (error) {
         throw error;
     }
@@ -104,8 +105,9 @@ const getTeneesProfileById = async (id) => {
 
 const getAllTeneesProfiles = async () => {
     try {
-        const response = await simpleFetch(`${API_URL}/`);
-        return response;
+        const response = await fetch(`${API_URL}/`);
+        const data = await response.json();
+        return data;
     } catch (error) {
         throw error;
     }
@@ -113,12 +115,13 @@ const getAllTeneesProfiles = async () => {
 
 const getTeneesProfileByUserId = async (userId) => {
     try {
-        const response = await simpleFetch(`${API_URL}/user/${userId}`);
-        return response;
+        const response = await fetch(`${API_URL}/user/${userId}`);
+        const data = await response.json();
+        return data;
     } catch (error) {
         throw error;
     }
-}
+};
 
 export {
     createTeneesProfile,
@@ -128,4 +131,3 @@ export {
     getAllTeneesProfiles,
     getTeneesProfileByUserId,
 };
-

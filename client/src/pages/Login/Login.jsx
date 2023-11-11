@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 
-const Login = () => {
-    const [loggedIn, setLoggedIn] = useState(false);
+const Login = ({api_url}) => {
+    const AUTH_URL = `${api_url}/auth/github`;
 
     return (
-        <div>
-            <p>Welcome to the login page!</p>
+        <div className="Login">
+            <h1>HousingPal</h1>
+            <center>
+                <a href={AUTH_URL}>
+                    <button className="headerBtn"> 🔒 Login via Github </button>
+                </a>
+            </center>
         </div>
     );
 };

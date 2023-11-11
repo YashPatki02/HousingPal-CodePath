@@ -1,6 +1,4 @@
-import simpleFetch from "./simpleFetch.js";
-
-const API_URL = "/api/tenees";
+const API_URL = "https://localhost:3001/api/leases";
 
 const createLeaseListing = async (credentials) => {
     const {
@@ -46,8 +44,9 @@ const createLeaseListing = async (credentials) => {
     };
 
     try {
-        const response = await simpleFetch(`${API_URL}/`, options);
-        return response;
+        const response = await fetch(`${API_URL}/`, options);
+        const data = await response.json();
+        return data;
     } catch (error) {
         throw error;
     }
@@ -67,35 +66,38 @@ const updateLeaseListing = async (credentials) => {
         utilities,
         lease_length,
         start_date,
-        pictures
+        pictures,
     } = credentials;
 
     const options = {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-             room_setup,
-        appliances,
-        amenities,
-        preference_gender,
-        preference_age,
-        other_preferences,
-        deal_breakers,
-        location,
-        rent,
-        utilities,
-        lease_length,
-        start_date,
-        pictures}),
+            room_setup,
+            appliances,
+            amenities,
+            preference_gender,
+            preference_age,
+            other_preferences,
+            deal_breakers,
+            location,
+            rent,
+            utilities,
+            lease_length,
+            start_date,
+            pictures,
+        }),
     };
 
     try {
-        const response = await simpleFetch(`${API_URL}/${credentials.id}`, options);
-        return response;
+        const response = await fetch(`${API_URL}/${credentials.id}`, options);
+        const data = await response.json();
+
+        return data;
     } catch (error) {
         throw error;
     }
-}
+};
 
 const deleteLeaseListing = async (id) => {
     const options = {
@@ -103,8 +105,9 @@ const deleteLeaseListing = async (id) => {
     };
 
     try {
-        const response = await simpleFetch(`${API_URL}/${id}`, options);
-        return response;
+        const response = await fetch(`${API_URL}/${id}`, options);
+        const data = await response.json();
+        return data;
     } catch (error) {
         throw error;
     }
@@ -112,8 +115,9 @@ const deleteLeaseListing = async (id) => {
 
 const getLeaseListingById = async (id) => {
     try {
-        const response = await simpleFetch(`${API_URL}/${id}`);
-        return response;
+        const response = await fetch(`${API_URL}/${id}`);
+        const data = await response.json();
+        return data;
     } catch (error) {
         throw error;
     }
@@ -121,8 +125,9 @@ const getLeaseListingById = async (id) => {
 
 const getAllLeaseListings = async () => {
     try {
-        const response = await simpleFetch(`${API_URL}/`);
-        return response;
+        const response = await fetch(`${API_URL}/`);
+        const data = await response.json();
+        return data;
     } catch (error) {
         throw error;
     }
@@ -130,8 +135,9 @@ const getAllLeaseListings = async () => {
 
 const getLeaseListingsByUserId = async (userId) => {
     try {
-        const response = await simpleFetch(`${API_URL}/user/${userId}`);
-        return response;
+        const response = await fetch(`${API_URL}/user/${userId}`);
+        const data = await response.json();
+        return data;
     } catch (error) {
         throw error;
     }
@@ -139,8 +145,9 @@ const getLeaseListingsByUserId = async (userId) => {
 
 const getLeaseListingsByLeaseType = async (leaseType) => {
     try {
-        const response = await simpleFetch(`${API_URL}/type/${leaseType}`);
-        return response;
+        const response = await fetch(`${API_URL}/type/${leaseType}`);
+        const data = await response.json();
+        return data;
     } catch (error) {
         throw error;
     }
@@ -155,4 +162,3 @@ export default {
     getLeaseListingsByUserId,
     getLeaseListingsByLeaseType,
 };
-

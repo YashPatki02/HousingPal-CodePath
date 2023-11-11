@@ -1,29 +1,47 @@
-import { pool } from './database.js'
-import './dotenv.js'
+import { pool } from "./database.js";
+import "./dotenv.js";
 
 const createUsersTable = async () => {
-    const creasteUsersQuery = `
+    const createUsersTableQuery = `
+    CREATE TABLE IF NOT EXISTS users (
+      id serial PRIMARY KEY,
+      githubid integer NOT NULL,
+      username varchar(100) NOT NULL,
+      avatarurl varchar(500) NOT NULL,
+      accesstoken varchar(500) NOT NULL
+    );
+  `;
+
+    try {
+        const res = await pool.query(createUsersTableQuery);
+        console.log("🎉 users table created successfully");
+    } catch (error) {
+        console.error("⚠️ error creating users table", err);
+    }
+};
+
+const createUserDetailsTable = async () => {
+    const creasteUsersDetailsQuery = `
     CREATE TABLE IF NOT EXISTS
-        users (
+        users_details (
             id SERIAL PRIMARY KEY,
-            email VARCHAR(50) UNIQUE NOT NULL,
-            password VARCHAR(20) NOT NULL,
+            user_id SERIAL REFERENCES users(id) ON DELETE CASCADE,
             first_name VARCHAR(50) NOT NULL,
             last_name VARCHAR(50) NOT NULL,
             university VARCHAR(50) NOT NULL,
             school_year VARCHAR(50) NOT NULL,
             contact_info VARCHAR(50) NOT NULL,
             user_type VARCHAR(50) NOT NULL,
-            created_on TIMESTAMP NOT NULL
+            onboarded BOOLEAN NOT NULL DEFAULT FALSE
         )`;
 
     try {
-        const result = await pool.query(creasteUsersQuery);
-        console.log("🎉 users table created successfully");
-    } catch (error) {   
-        console.log("🚨 error creating users table", error);
+        const result = await pool.query(creasteUsersDetailsQuery);
+        console.log("🎉 users_details table created successfully");
+    } catch (error) {
+        console.log("🚨 error creating users_details table", error);
     }
-}
+};
 
 const createListingsTable = async () => {
     const createListingsQuery = `
@@ -51,10 +69,10 @@ const createListingsTable = async () => {
     try {
         const result = await pool.query(createListingsQuery);
         console.log("🎉 listings table created successfully");
-    } catch (error) {   
+    } catch (error) {
         console.log("🚨 error creating listings table", error);
     }
-}
+};
 
 const createTeneesProfilesTable = async () => {
     const createTeneesProfilesQuery = `
@@ -77,10 +95,10 @@ const createTeneesProfilesTable = async () => {
     try {
         const result = await pool.query(createTeneesProfilesQuery);
         console.log("🎉 tenees table created successfully");
-    } catch (error) {   
+    } catch (error) {
         console.log("🚨 error creating tenees table", error);
     }
-}
+};
 
 const createLeaseFavoritesTable = async () => {
     const createLeaseFavoritesQuery = `
@@ -94,10 +112,10 @@ const createLeaseFavoritesTable = async () => {
     try {
         const result = await pool.query(createLeaseFavoritesQuery);
         console.log("🎉 lease_favorites table created successfully");
-    } catch (error) {   
+    } catch (error) {
         console.log("🚨 error creating lease favorites table", error);
     }
-}
+};
 
 const createTeneesFavoritesTable = async () => {
     const createTeneesFavoritesQuery = `
@@ -111,14 +129,14 @@ const createTeneesFavoritesTable = async () => {
     try {
         const result = await pool.query(createTeneesFavoritesQuery);
         console.log("🎉 tenees_favorites table created successfully");
-    } catch (error) {   
+    } catch (error) {
         console.log("🚨 error creating tenees favorites table", error);
     }
-}
+};
 
 await createUsersTable();
+await createUserDetailsTable();
 await createListingsTable();
 await createTeneesProfilesTable();
 await createLeaseFavoritesTable();
 await createTeneesFavoritesTable();
-
