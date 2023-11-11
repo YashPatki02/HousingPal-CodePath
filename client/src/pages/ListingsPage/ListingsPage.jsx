@@ -3,23 +3,22 @@ import LeasesAPI from "../../services/leases.js";
 import LeaseTile from "../../components/LeaseTile";
 import { Link } from "react-router-dom";
 
-const ListingsPage = () => {
+const ListingsPage = ({api_url}) => {
     const [listings, setListings] = useState([]);
 
-    // Function to fetch listings and update the state
-    const fetchListings = async () => {
-        try {
-            const response = await LeasesAPI.getAllLeaseListings();
-            setListings(response);
-        } catch (error) {
-            console.error("Error fetching listings: ", error);
-        }
-    };
-
     useEffect(() => {
+        const fetchListings = async () => {
+            try {
+                const response = await LeasesAPI.getAllLeaseListings();
+                setListings(response);
+            } catch (error) {
+                console.error("Error fetching listings: ", error);
+            }
+        };
+
         fetchListings();
     }, []);
-
+    
     return (
         <div>
             <h2>Welcome to the Listings Page!</h2>

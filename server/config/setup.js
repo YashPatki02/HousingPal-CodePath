@@ -51,18 +51,18 @@ const createListingsTable = async () => {
             listing_type VARCHAR(50) NOT NULL,
             tenant_names VARCHAR(50) NOT NULL,
             room_setup VARCHAR(50) NOT NULL,
-            appliances VARCHAR(50) NOT NULL,
-            amenities VARCHAR(50) NOT NULL,
-            preference_gender VARCHAR(30) NOT NULL,
+            appliances VARCHAR(50),
+            amenities VARCHAR(50),
             preference_age VARCHAR(30) NOT NULL,
-            other_preferences VARCHAR(250) NOT NULL,
-            deal_breakers VARCHAR(250) NOT NULL,
+            preference_gender VARCHAR(30) NOT NULL,
+            other_preferences VARCHAR(250) ,
+            deal_breakers VARCHAR(250) ,
             location VARCHAR(250) NOT NULL,
             rent NUMERIC NOT NULL,
             utilities NUMERIC NOT NULL,
             lease_length VARCHAR(50) NOT NULL,
             start_date DATE NOT NULL,
-            pictures TEXT[] NOT NULL,
+            pictures TEXT[],
             user_id INTEGER NOT NULL REFERENCES users(id)
         )`;
 
@@ -81,13 +81,13 @@ const createTeneesProfilesTable = async () => {
             id SERIAL PRIMARY KEY,
             gender VARCHAR(50) NOT NULL,
             age INTEGER NOT NULL,
-            bio VARCHAR(250) NOT NULL,
-            hobbies_interests VARCHAR(250) NOT NULL,
-            preferences VARCHAR(250) NOT NULL,
-            deal_breakers VARCHAR(250) NOT NULL,
+            bio VARCHAR(250),
+            hobbies_interests VARCHAR(250) ,
+            preferences VARCHAR(250) ,
+            deal_breakers VARCHAR(250) ,
             budget_min NUMERIC NOT NULL,
             budget_max NUMERIC NOT NULL,
-            picture TEXT NOT NULL,
+            picture TEXT,
             user_id INTEGER NOT NULL REFERENCES users(id)
             
         )`;

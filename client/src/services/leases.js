@@ -1,4 +1,4 @@
-const API_URL = "https://localhost:3001/api/leases";
+const API_URL = "http://localhost:3001/api/leases";
 
 const createLeaseListing = async (credentials) => {
     const {
@@ -125,7 +125,7 @@ const getLeaseListingById = async (id) => {
 
 const getAllLeaseListings = async () => {
     try {
-        const response = await fetch(`${API_URL}/`);
+        const response = await fetch(`${API_URL}`);
         const data = await response.json();
         return data;
     } catch (error) {

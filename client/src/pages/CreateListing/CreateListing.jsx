@@ -1,9 +1,13 @@
 import React from "react";
 import { useFormik } from "formik";
+import { useNavigate } from "react-router";
 import * as Yup from "yup";
 import LeaseAPI from '../../services/leases.js'
 
 const CreateListing = ({ user, api_url }) => {
+
+    const navigate = useNavigate();
+
     const initialValues = {
         listing_type: "",
         tenant_names: "",
@@ -53,6 +57,7 @@ const CreateListing = ({ user, api_url }) => {
         console.log(response);
 
         formik.resetForm();
+        navigate(`/`);
     };
 
     const formik = useFormik({

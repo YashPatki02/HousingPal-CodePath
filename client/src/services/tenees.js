@@ -1,4 +1,4 @@
-const API_URL = "/api/tenees";
+const API_URL = "http://localhost:3001/api/tenees";
 
 const createTeneesProfile = async (credentials) => {
     const {
@@ -123,7 +123,7 @@ const getTeneesProfileByUserId = async (userId) => {
     }
 };
 
-export {
+export default {
     createTeneesProfile,
     updateTeneesProfile,
     deleteTeneesProfile,

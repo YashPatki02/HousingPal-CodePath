@@ -98,7 +98,7 @@ Backend: Node.js, Express.js, Passport.js, PostgreSQL
 
 - [ ] Users can create, read, update, and delete Listings and Profiles.
 
-[gif goes here]
+![Routing Basics](gifs/routing-frontend.gif)
 
 ### 7. Users can view their own Listings and Profiles in their User Profile page
 
