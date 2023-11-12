@@ -3,7 +3,7 @@ import LeasesAPI from "../../services/leases.js";
 import LeaseTile from "../../components/LeaseTile";
 import { Link } from "react-router-dom";
 
-const ListingsPage = ({ api_url }) => {
+const ListingsPage = ({ api_url, user }) => {
     const [listings, setListings] = useState([]);
 
     useEffect(() => {
@@ -24,7 +24,7 @@ const ListingsPage = ({ api_url }) => {
             <h2>Welcome to the Listings Page!</h2>
             <div>
                 {listings.map((listing) => (
-                    <LeaseTile key={listing.id} listing={listing} />
+                    <LeaseTile key={listing.id} listing={listing} user={user} />
                 ))}
             </div>
             <Link to="/listing/create">Create Listing</Link>

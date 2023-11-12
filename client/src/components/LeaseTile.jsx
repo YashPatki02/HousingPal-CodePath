@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router";
 
-const LeaseTile = ({ listing }) => {
+const LeaseTile = ({ listing, user }) => {
     const navigate = useNavigate();
     const {
         id,
@@ -23,13 +23,34 @@ const LeaseTile = ({ listing }) => {
     } = listing;
 
     const goToListing = (id) => () => {
-        navigate(`/listing/${id}`)
-    }
+        navigate(`/listing/${id}`);
+    };
+
+    const favorite = (id) => async () => {
+        console.log(`Favorite listing with id ${id}`);
+        console.log(`favorited by user with id ${user.id}`);
+
+        const response = await fetch(
+            `http://localhost:3001/api/favorites_leases`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    userId: user.id,
+                    listingId: id,
+                }),
+            }
+        );
+        const data = await response.json();
+    };
 
     return (
         <div className="lease-tile">
-            <h2>{listing_type} Listing</h2> 
+            <h2>{listing_type} Listing</h2>
             <button onClick={goToListing(id)}>View Listing Details</button>
+            <button onClick={favorite(id)}>Favorite Listing</button>
             <p>Tenants: {tenant_names}</p>
             <p>Room Setup: {room_setup}</p>
             <p>Appliances: {appliances}</p>

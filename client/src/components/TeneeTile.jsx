@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router";
 
-const TeneeTile = ({ tenee }) => {
+const TeneeTile = ({ tenee, user }) => {
     const navigate = useNavigate();
     const {
         id,
@@ -21,10 +21,32 @@ const TeneeTile = ({ tenee }) => {
         navigate(`/tenee/${id}`);
     };
 
+    const favorite = (id) => async () => {
+        console.log(`Favorite tenee with id ${id}`);
+        console.log(`favorited by user with id ${user.id}`);
+
+        const response = await fetch(
+            `http://localhost:3001/api/favorites_tenees`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    userId: user.id,
+                    teneesId: id,
+                }),
+            }
+        );
+        const data = await response.json();
+        console.log(data);
+    }
+
     return (
         <div className="tenee-tile">
             <h1>{name}</h1>
-            <button onClick={goToPost(id)}>View Listing Details</button>
+            <button onClick={goToPost(id)}>View Tenee Post</button>
+            <button onClick={favorite(id)}>Favorite Tenee</button>
             <h2>
                 {gender === "male"
                     ? "Male"

@@ -1,12 +1,12 @@
 import { pool } from "../config/database.js";
 
 const addFavoriteTenee = async (req, res) => {
-    const { userId, listingId } = req.body;
+    const { userId, teneesId } = req.body;
 
     try {
         const results = await pool.query(
-            `INSERT INTO tenee_favorites (user_id, listing_id) VALUES ($1, $2) RETURNING *`,
-            [userId, listingId]
+            `INSERT INTO tenees_favorites (user_id, tenees_id) VALUES ($1, $2) RETURNING *`,
+            [userId, teneesId]
         );
         res.status(201).json(results.rows[0]);
     } catch (error) {

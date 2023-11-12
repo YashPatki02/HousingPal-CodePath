@@ -3,7 +3,7 @@ import TeneesAPI from "../../services/tenees.js";
 import TeneeTile from "../../components/TeneeTile.jsx";
 import { Link } from "react-router-dom";
 
-const TeneesPage = ({ api_url }) => {
+const TeneesPage = ({ api_url, user }) => {
     const [tenees, setTenees] = useState([]);
 
     useEffect(() => {
@@ -24,7 +24,7 @@ const TeneesPage = ({ api_url }) => {
             <h2>Welcome to the Tenees Page!</h2>
             <div>
                 {tenees.map((post) => (
-                    <TeneeTile key={post.id} tenee={post} />
+                    <TeneeTile key={post.id} tenee={post} user={user} />
                 ))}
             </div>
             <Link to="/tenee/create">Create Post</Link>

@@ -142,7 +142,7 @@ const getAllTeneesProfile = async (req, res) => {
 };
 
 const getTeneesProfileByUserId = async (req, res) => {
-    const userId = req.params.userId;
+    const userId = parseInt(req.params.userId);
 
     try {
         const results = await pool.query(
