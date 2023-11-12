@@ -7,6 +7,7 @@ import LeaseAPI from "../../services/leases.js";
 const ListingEdit = ({ user }) => {
     const { id } = useParams();
     const navigate = useNavigate();
+    
     const [listing, setListing] = useState({
         tenant_names: "",
         room_setup: "",

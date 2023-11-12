@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router";
 
 const LeaseTile = ({ listing }) => {
+    const navigate = useNavigate();
     const {
         id,
         listing_type,
@@ -21,7 +23,7 @@ const LeaseTile = ({ listing }) => {
     } = listing;
 
     const goToListing = (id) => () => {
-        window.location.href = `/listing/${id}`;
+        navigate(`/listing/${id}`)
     }
 
     return (

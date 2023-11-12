@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import LeaseTile from "../../components/LeaseTile";
 import { useNavigate, useParams } from "react-router";
 
 const Listing = ({ user }) => {
@@ -16,7 +15,7 @@ const Listing = ({ user }) => {
                 const data = await response.json();
                 setListing(data);
             } catch (error) {
-                console.error("Error fetching listings: ", error);
+                console.error("Error fetching listing: ", error);
             }
         };
 
@@ -28,12 +27,7 @@ const Listing = ({ user }) => {
             const response = await fetch(`http://localhost:3001/api/leases/${id}`, {
                 method: "DELETE",
             });
-
-            console.log(response);
             const data = await response.json();
-            console.log(data);
-
-            
         } catch (error) {
             console.error("Error deleting listing: ", error);
         } finally {
@@ -43,7 +37,7 @@ const Listing = ({ user }) => {
 
     return (
         <div>
-            <h2>Listings</h2>
+            <h2>Listing</h2>
 
             <div className="lease-tile">
                 <h2>{listing && listing.listing_type} Listing</h2>

@@ -1,7 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router";
 
 const TeneeTile = ({ tenee }) => {
+    const navigate = useNavigate();
     const {
+        id,
+        name,
         gender,
         age,
         bio,
@@ -13,8 +17,14 @@ const TeneeTile = ({ tenee }) => {
         picture,
     } = tenee;
 
+    const goToPost = (id) => () => {
+        navigate(`/tenee/${id}`);
+    };
+
     return (
         <div className="tenee-tile">
+            <h1>{name}</h1>
+            <button onClick={goToPost(id)}>View Listing Details</button>
             <h2>
                 {gender === "male"
                     ? "Male"

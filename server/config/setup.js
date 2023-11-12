@@ -79,10 +79,11 @@ const createTeneesProfilesTable = async () => {
     CREATE TABLE IF NOT EXISTS
         tenees (
             id SERIAL PRIMARY KEY,
+            name VARCHAR(50) NOT NULL,
             gender VARCHAR(50) NOT NULL,
             age INTEGER NOT NULL,
             bio VARCHAR(250),
-            hobbies_interests VARCHAR(250) ,
+            hobbies_interests VARCHAR(250),
             preferences VARCHAR(250) ,
             deal_breakers VARCHAR(250) ,
             budget_min NUMERIC NOT NULL,

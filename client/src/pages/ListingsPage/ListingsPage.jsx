@@ -3,7 +3,7 @@ import LeasesAPI from "../../services/leases.js";
 import LeaseTile from "../../components/LeaseTile";
 import { Link } from "react-router-dom";
 
-const ListingsPage = ({api_url}) => {
+const ListingsPage = ({ api_url }) => {
     const [listings, setListings] = useState([]);
 
     useEffect(() => {

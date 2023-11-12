@@ -10,6 +10,5 @@ router.delete('/:id', LeasesController.deleteLeaseListing);
 router.get('/:id', LeasesController.getLeaseListingById);
 router.get('/', LeasesController.getAllLeaseListings);
 router.get('/user/:userId', LeasesController.getLeaseListingsByUserId);
-router.get('/type/:leaseType', LeasesController.getLeaseListingsByLeaseType);
 
 export default router;

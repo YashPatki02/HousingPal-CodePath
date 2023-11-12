@@ -19,7 +19,6 @@ const TeneesPage = ({ api_url }) => {
         fetchProfiles();
     }, []);
 
-
     return (
         <div>
             <h2>Welcome to the Tenees Page!</h2>

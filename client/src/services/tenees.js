@@ -2,6 +2,7 @@ const API_URL = "http://localhost:3001/api/tenees";
 
 const createTeneesProfile = async (credentials) => {
     const {
+        name,
         gender,
         age,
         bio,
@@ -18,6 +19,7 @@ const createTeneesProfile = async (credentials) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+            name,
             gender,
             age,
             bio,

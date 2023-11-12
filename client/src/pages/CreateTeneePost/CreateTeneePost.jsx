@@ -1,10 +1,13 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useNavigate } from "react-router";
 import TeneesAPI from "../../services/tenees.js";
 
 const CreateTeneePost = ({ user, api_url }) => {
+    const navigate = useNavigate();
     const initialValues = {
+        name: "",
         gender: "",
         age: "",
         bio: "",
@@ -16,6 +19,7 @@ const CreateTeneePost = ({ user, api_url }) => {
     };
 
     const validationSchema = Yup.object({
+        name: Yup.string().required("Required"),
         gender: Yup.string().required("Required"),
         age: Yup.number().required("Required"),
         bio: Yup.string(),
@@ -37,10 +41,12 @@ const CreateTeneePost = ({ user, api_url }) => {
 
         console.log(credentials);
 
+        
         const response = await TeneesAPI.createTeneesProfile(credentials);
         console.log(response);
 
         formik.resetForm();
+        navigate("/tenees");
     };
 
     const formik = useFormik({
@@ -53,6 +59,20 @@ const CreateTeneePost = ({ user, api_url }) => {
         <div>
             <h2>Create a Tenee Profile</h2>
             <form onSubmit={formik.handleSubmit}>
+                <div>
+                    <label htmlFor="name">Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.name}
+                    />
+                    {formik.touched.name && formik.errors.name ? (
+                        <div>{formik.errors.name}</div>
+                    ) : null}
+                </div>
                 <div>
                     <label htmlFor="gender">Gender</label>
                     <select
@@ -74,7 +94,7 @@ const CreateTeneePost = ({ user, api_url }) => {
                 <div>
                     <label htmlFor="age">Age</label>
                     <input
-                        type="text"
+                        type="number"
                         id="age"
                         name="age"
                         onChange={formik.handleChange}

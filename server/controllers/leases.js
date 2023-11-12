@@ -164,20 +164,6 @@ const getLeaseListingsByUserId = async (req, res) => {
     }
 };
 
-const getLeaseListingsByLeaseType = async (req, res) => {
-    const leaseType = req.params.leaseType;
-
-    try {
-        const results = await pool.query(
-            `SELECT * FROM listings WHERE listing_type = $1`,
-            [leaseType]
-        );
-        res.status(201).json(results.rows);
-    } catch (error) {
-        res.status(409).json({ error: error.message });
-    }
-};
-
 export default {
     createLeaseListing,
     updateLeaseListing,
@@ -185,5 +171,4 @@ export default {
     getLeaseListingById,
     getAllLeaseListings,
     getLeaseListingsByUserId,
-    getLeaseListingsByLeaseType,
 };
