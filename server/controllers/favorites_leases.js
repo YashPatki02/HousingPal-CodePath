@@ -21,8 +21,8 @@ const deleteFavoriteLease = async (req, res) => {
         const results = await pool.query(
             `DELETE FROM lease_favorites WHERE user_id = $1 AND listing_id = $2`,
             [userId, listingId]
-        );
-        res.status(201).json(results.rows[0]);
+        );        
+        res.status(201).json(results.rowCount);
     } catch (error) {
         res.status(409).json({ error: error.message });
     }

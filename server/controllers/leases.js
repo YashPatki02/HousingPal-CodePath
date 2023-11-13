@@ -131,6 +131,7 @@ const getLeaseListingById = async (req, res) => {
             `SELECT * FROM listings WHERE id = $1`,
             [listingId]
         );
+
         if (results.rows.length === 0) {
             res.status(404).json({ error: "Listing not found" });
         } else {

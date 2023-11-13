@@ -137,7 +137,7 @@ function App() {
                 ),
         },
         {
-            path: "user/:id/favorites",
+            path: "user/favorites/:id",
             element:
                 user && user.id ? (
                     <FavoritesPage api_url={API_URL} user={user} />

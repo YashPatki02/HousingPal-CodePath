@@ -1,8 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 
-const LeaseTile = ({ listing, user }) => {
+const LeaseTile = ({
+    listing,
+    lease,
+    user,
+    favorited,
+    favorite,
+    unFavorite,
+}) => {
     const navigate = useNavigate();
+    const [leaseListing, setLeaseListing] = useState(listing);
+
+    useEffect(() => {
+        const getListing = async (id) => {
+            try {
+                const response = await fetch(
+                    `http://localhost:3001/api/leases/${id}`
+                );
+                const data = await response.json();
+                setLeaseListing(data);
+            } catch (error) {
+                console.error("Error fetching listing: ", error);
+            }
+        };
+
+        // If leaseListing is null, fetch the listing
+        if (!leaseListing.rent) {
+            getListing(lease.listing_id);
+        }
+    }, []);
+
     const {
         id,
         listing_type,
@@ -20,37 +48,25 @@ const LeaseTile = ({ listing, user }) => {
         lease_length,
         start_date,
         pictures,
-    } = listing;
+    } = leaseListing;
 
     const goToListing = (id) => () => {
         navigate(`/listing/${id}`);
-    };
-
-    const favorite = (id) => async () => {
-        console.log(`Favorite listing with id ${id}`);
-        console.log(`favorited by user with id ${user.id}`);
-
-        const response = await fetch(
-            `http://localhost:3001/api/favorites_leases`,
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    userId: user.id,
-                    listingId: id,
-                }),
-            }
-        );
-        const data = await response.json();
     };
 
     return (
         <div className="lease-tile">
             <h2>{listing_type} Listing</h2>
             <button onClick={goToListing(id)}>View Listing Details</button>
-            <button onClick={favorite(id)}>Favorite Listing</button>
+
+            {favorited ? (
+                <button onClick={() => unFavorite(id)}>
+                    Unfavorite Listing
+                </button>
+            ) : (
+                <button onClick={() => favorite(id)}>Favorite Listing</button>
+            )}
+
             <p>Tenants: {tenant_names}</p>
             <p>Room Setup: {room_setup}</p>
             <p>Appliances: {appliances}</p>

@@ -66,7 +66,7 @@ const Header = ({ logout, user }) => {
                             key="3"
                             icon={<StarOutlined />}
                             onClick={() => {
-                                navigateTo(`user/${id}/favorites`);
+                                navigateTo(`user/favorites/${id}`);
                             }}
                         >
                             Favorites

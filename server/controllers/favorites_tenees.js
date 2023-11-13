@@ -15,14 +15,14 @@ const addFavoriteTenee = async (req, res) => {
 };
 
 const deleteFavoriteTenee = async (req, res) => {
-    const { userId, listingId } = req.body;
+    const { userId, teneesId } = req.body;
 
     try {
         const results = await pool.query(
-            `DELETE FROM tenee_favorites WHERE user_id = $1 AND listing_id = $2`,
-            [userId, listingId]
+            `DELETE FROM tenees_favorites WHERE user_id = $1 AND tenees_id = $2`,
+            [userId, teneesId]
         );
-        res.status(201).json(results.rows[0]);
+        res.status(201).json(results.rowCount);
     } catch (error) {
         res.status(409).json({ error: error.message });
     }
@@ -33,7 +33,7 @@ const getAllFavoriteTeneesByUser = async (req, res) => {
 
     try {
         const results = await pool.query(
-            `SELECT * FROM tenee_favorites WHERE user_id = $1`,
+            `SELECT * FROM tenees_favorites WHERE user_id = $1`,
             [userId]
         );
         res.status(201).json(results.rows);
