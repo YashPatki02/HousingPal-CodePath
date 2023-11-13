@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import LeaseTile from "../../components/LeaseTile";
+import TeneeTile from "../../components/TeneeTile";
 
 const UserProfile = ({ user }) => {
     const [listings, setListings] = useState([]);
@@ -54,16 +55,21 @@ const UserProfile = ({ user }) => {
             )}
             <h2>Welcome to your user profile, {user.username}!</h2>
             <h3>Your Lease Listings:</h3>
+
             {listings.length === 0 ? (
                 <p>No lease listings found.</p>
             ) : (
                 <div>
                     {listings.map((listing) => (
-                        <LeaseTile key={listing.id} listing={listing} />
+                        <LeaseTile
+                            key={listing.id}
+                            listing={listing}
+                            user={user}
+                        />
                     ))}
                 </div>
             )}
-
+            
             <br />
             <h3>Your Tenee Posts:</h3>
             {teneePosts.length === 0 ? (
@@ -71,7 +77,7 @@ const UserProfile = ({ user }) => {
             ) : (
                 <div>
                     {teneePosts.map((post) => (
-                        <LeaseTile key={post.id} listing={post} />
+                        <TeneeTile key={post.id} tenee={post} user={user}/>
                     ))}
                 </div>
             )}

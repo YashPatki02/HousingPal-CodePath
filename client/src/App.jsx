@@ -10,7 +10,6 @@ import Tenee from "./pages/Tenee/Tenee";
 import UserProfile from "./pages/UserProfile/UserProfile";
 import Login from "./pages/Login/Login";
 import FavoritesPage from "./pages/FavoritesPage/FavoritesPage";
-import Onboarding from "./pages/Onboarding/Onboarding";
 import CreateListing from "./pages/CreateListing/CreateListing";
 import CreateTeneePost from "./pages/CreateTeneePost/CreateTeneePost";
 import ListingEdit from "./pages/ListingEdit/ListingEdit";
@@ -144,16 +143,7 @@ function App() {
                 ) : (
                     <Login api_url={API_URL} />
                 ),
-        },
-        {
-            path: "/onboarding",
-            element:
-                user && user.id ? (
-                    <Onboarding api_url={API_URL} />
-                ) : (
-                    <Login api_url={API_URL} />
-                ),
-        },
+        }
     ]);
 
     return (

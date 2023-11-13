@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router";
 const Listing = ({ user }) => {
     const { id } = useParams();
     const [listing, setListing] = useState(null);
+    const [isOwner, setIsOwner] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -22,11 +23,21 @@ const Listing = ({ user }) => {
         fetchListing();
     }, [id]);
 
+    useEffect(() => {
+        if (listing) {
+            setIsOwner(listing.user_id === user.id);
+        }
+    }, [listing]);
+
+
     const deleteListing = (id) => async () => {
         try {
-            const response = await fetch(`http://localhost:3001/api/leases/${id}`, {
-                method: "DELETE",
-            });
+            const response = await fetch(
+                `http://localhost:3001/api/leases/${id}`,
+                {
+                    method: "DELETE",
+                }
+            );
             const data = await response.json();
         } catch (error) {
             console.error("Error deleting listing: ", error);
@@ -75,14 +86,16 @@ const Listing = ({ user }) => {
                 )}
             </div>
 
-            <button onClick={() => navigate(`/listing/edit/${id}`)}>
-                Edit Listing
-            </button>
-            <button
-                onClick={deleteListing(id)}
-            >
-                Delete Listing
-            </button>
+            {isOwner && (
+                <>
+                    <button onClick={() => navigate(`/listing/edit/${id}`)}>
+                        Edit Listing
+                    </button>
+                    <button onClick={() => deleteListing(id)}>
+                        Delete Listing
+                    </button>
+                </>
+            )}
         </div>
     );
 };

@@ -74,9 +74,6 @@ const updateLeaseListing = async (req, res) => {
         pictures
     } = req.body;
 
-    console.log(req.body)
-
-
     try {
         const results = await pool.query(
             `UPDATE listings SET room_setup = $1, appliances = $2, amenities = $3,

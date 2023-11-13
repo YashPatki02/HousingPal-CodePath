@@ -129,8 +129,6 @@ const FavoritesPage = ({ user }) => {
         }
     };
 
-    console.log(tenees);
-
     return (
         <div>
             <h1>Favorited Leases </h1>

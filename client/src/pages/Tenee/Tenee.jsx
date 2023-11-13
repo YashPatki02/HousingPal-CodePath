@@ -5,6 +5,8 @@ const Tenee = ({ user }) => {
     const { id } = useParams();
     const [post, setPost] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [isOwner, setIsOwner] = useState(false);
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -24,6 +26,12 @@ const Tenee = ({ user }) => {
         fetchPost();
         setLoading(false);
     }, [id]);
+
+    useEffect(() => {
+        if (post) {
+            setIsOwner(post.user_id === user.id);
+        }
+    }, [post]);
 
     const deletePost = (id) => async () => {
         try {
@@ -76,10 +84,14 @@ const Tenee = ({ user }) => {
                 <p>Loading...</p>
             )}
 
-            <button onClick={() => navigate(`/tenee/edit/${id}`)}>
-                Edit Post
-            </button>
-            <button onClick={deletePost(id)}>Delete Listing</button>
+            {isOwner && (
+                <>
+                    <button onClick={() => navigate(`/tenee/edit/${id}`)}>
+                        Edit Post
+                    </button>
+                    <button onClick={deletePost(id)}>Delete Listing</button>
+                </>
+            )}
         </div>
     );
 };

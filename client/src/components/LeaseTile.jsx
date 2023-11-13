@@ -28,6 +28,9 @@ const LeaseTile = ({
         // If leaseListing is null, fetch the listing
         if (!leaseListing.rent) {
             getListing(lease.listing_id);
+        } else {
+            // Otherwise, set the listing to the leaseListing
+            return;
         }
     }, []);
 
@@ -48,6 +51,7 @@ const LeaseTile = ({
         lease_length,
         start_date,
         pictures,
+        user_id,
     } = leaseListing;
 
     const goToListing = (id) => () => {
@@ -59,13 +63,16 @@ const LeaseTile = ({
             <h2>{listing_type} Listing</h2>
             <button onClick={goToListing(id)}>View Listing Details</button>
 
-            {favorited ? (
-                <button onClick={() => unFavorite(id)}>
-                    Unfavorite Listing
-                </button>
-            ) : (
-                <button onClick={() => favorite(id)}>Favorite Listing</button>
-            )}
+            {user_id !== user.id &&
+                (favorited ? (
+                    <button onClick={() => unFavorite(id)}>
+                        Unfavorite Listing
+                    </button>
+                ) : (
+                    <button onClick={() => favorite(id)}>
+                        Favorite Listing
+                    </button>
+                ))}
 
             <p>Tenants: {tenant_names}</p>
             <p>Room Setup: {room_setup}</p>
