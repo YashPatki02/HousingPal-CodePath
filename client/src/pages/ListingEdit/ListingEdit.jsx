@@ -14,7 +14,6 @@ const ListingEdit = ({ user }) => {
         appliances: "",
         amenities: "",
         preference_gender: "",
-        preference_age: "",
         other_preferences: "",
         deal_breakers: "",
         location: "",
@@ -22,7 +21,8 @@ const ListingEdit = ({ user }) => {
         utilities: 0,
         lease_length: "",
         start_date: "",
-        pictures: [],
+        contact_info: "",
+        university: "",
         user_id: 0,
     });
     const [loading, setLoading] = useState(true);
@@ -59,7 +59,6 @@ const ListingEdit = ({ user }) => {
         appliances: "",
         amenities: "",
         preference_gender: "",
-        preference_age: "",
         other_preferences: "",
         deal_breakers: "",
         location: "",
@@ -67,7 +66,8 @@ const ListingEdit = ({ user }) => {
         utilities: 0,
         lease_length: "",
         start_date: "",
-        pictures: [],
+        contact_info: "",
+        university: "",
     };
 
     const validationSchema = Yup.object({
@@ -75,7 +75,6 @@ const ListingEdit = ({ user }) => {
         appliances: Yup.string(),
         amenities: Yup.string(),
         preference_gender: Yup.string().required("Required"),
-        preference_age: Yup.string().required("Required"),
         other_preferences: Yup.string(),
         deal_breakers: Yup.string(),
         location: Yup.string().required("Required"),
@@ -83,6 +82,8 @@ const ListingEdit = ({ user }) => {
         utilities: Yup.number().required("Required").min(0),
         lease_length: Yup.string().required("Required"),
         start_date: Yup.date().required("Required"),
+        contact_info: Yup.string().required("Required"),
+        university: Yup.string().required("Required"),
     });
 
     const onSubmit = async (values) => {
@@ -145,8 +146,9 @@ const ListingEdit = ({ user }) => {
                         value={formik.values.room_setup}
                     >
                         <option value="">Select a Room Setup</option>
-                        <option value="private">Private</option>
-                        <option value="shared">Shared</option>
+                        <option value="Single">Single</option>
+                        <option value="Double">Double</option>
+                        <option value="Other">Other</option>
                     </select>
                     {formik.touched.room_setup && formik.errors.room_setup ? (
                         <div>{formik.errors.room_setup}</div>
@@ -191,33 +193,13 @@ const ListingEdit = ({ user }) => {
                         value={formik.values.preference_gender}
                     >
                         <option value="">Select a Preference Gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="No Preference">No Preference</option>
                     </select>
                     {formik.touched.preference_gender &&
                     formik.errors.preference_gender ? (
                         <div>{formik.errors.preference_gender}</div>
-                    ) : null}
-                </div>
-                <div>
-                    <label htmlFor="preference_age">Preference Age</label>
-                    <select
-                        id="preference_age"
-                        name="preference_age"
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.preference_age}
-                    >
-                        <option value="">Select a Preference Age</option>
-                        <option value="18-25">18-25</option>
-                        <option value="26-35">26-35</option>
-                        <option value="36-45">36-45</option>
-                        {/* Add more age ranges if needed */}
-                    </select>
-                    {formik.touched.preference_age &&
-                    formik.errors.preference_age ? (
-                        <div>{formik.errors.preference_age}</div>
                     ) : null}
                 </div>
                 <div>
@@ -322,15 +304,32 @@ const ListingEdit = ({ user }) => {
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="pictures">Pictures</label>
+                    <label htmlFor="contact_info">Contact Info</label>
                     <input
-                        type="file"
-                        id="pictures"
-                        name="pictures"
-                        {...formik.getFieldProps("pictures")}
+                        type="text"
+                        id="contact_info"
+                        name="contact_info"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.contact_info}
                     />
-                    {formik.touched.pictures && formik.errors.pictures ? (
-                        <div>{formik.errors.pictures}</div>
+                    {formik.touched.contact_info &&
+                    formik.errors.contact_info ? (
+                        <div>{formik.errors.contact_info}</div>
+                    ) : null}
+                </div>
+                <div>
+                    <label htmlFor="university">University</label>
+                    <input
+                        type="text"
+                        id="university"
+                        name="university"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.university}
+                    />
+                    {formik.touched.university && formik.errors.university ? (
+                        <div>{formik.errors.university}</div>
                     ) : null}
                 </div>
                 <button type="submit">Submit</button>

@@ -31,20 +31,24 @@ function App() {
         accesstoken: "gho_16YJZz2Z4ZQZ4ZQZ4ZQZ4ZQZ4ZQZ4ZQZ4ZQZ",
     });
 
+    // const [user, setUser] = useState([]);
+
     // useEffect(() => {
     //     const getUser = async () => {
-    //         const response = await fetch(`${API_URL}/auth/login/success`, {
-    //             credentials: "include",
-    //         });
+    //         const response = await fetch(
+    //             `http://localhost:3001/auth/login/success`,
+    //             {
+    //                 credentials: "include",
+    //             }
+    //         );
 
     //         const json = await response.json();
     //         setUser(json.user);
+    //         console.log(user)
     //     };
 
-
     //     getUser();
-    // }, []);
-
+    // }, [API_URL]);
 
     const logout = async () => {
         const url = `${API_URL}/auth/logout`;
@@ -143,7 +147,7 @@ function App() {
                 ) : (
                     <Login api_url={API_URL} />
                 ),
-        }
+        },
     ]);
 
     return (

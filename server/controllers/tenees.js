@@ -12,7 +12,8 @@ const createTeneesProfile = async (req, res) => {
             deal_breakers,
             budget_min,
             budget_max,
-            picture,
+            contact_info,
+            university,
             user_id,
         } = req.body;
 
@@ -20,8 +21,9 @@ const createTeneesProfile = async (req, res) => {
 
         const results = await pool.query(
             `INSERT INTO tenees 
-            (gender, age, bio, hobbies_interests, preferences, deal_breakers, budget_min, budget_max, picture, user_id, name)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+            (gender, age, bio, hobbies_interests, preferences, deal_breakers, budget_min, budget_max, user_id, name, contact_info,
+        university)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
             RETURNING *`,
             [
                 gender,
@@ -32,9 +34,10 @@ const createTeneesProfile = async (req, res) => {
                 deal_breakers,
                 budget_min,
                 budget_max,
-                picture,
                 user_id,
                 name,
+                contact_info,
+                university,
             ]
         );
 
@@ -55,7 +58,8 @@ const updateTeneesProfile = async (req, res) => {
         deal_breakers,
         budget_min,
         budget_max,
-        picture,
+        contact_info,
+        university,
     } = req.body;
 
     try {
@@ -63,8 +67,8 @@ const updateTeneesProfile = async (req, res) => {
             `UPDATE tenees
              SET gender = $1, age = $2, bio = $3, hobbies_interests = $4,
              preferences = $5, deal_breakers = $6, budget_min = $7, budget_max = $8,
-             picture = $9
-             WHERE id = $10
+                contact_info = $9, university = $10
+             WHERE id = $11
              RETURNING *`,
             [
                 gender,
@@ -75,7 +79,8 @@ const updateTeneesProfile = async (req, res) => {
                 deal_breakers,
                 budget_min,
                 budget_max,
-                picture,
+                contact_info,
+                university,
                 id,
             ]
         );

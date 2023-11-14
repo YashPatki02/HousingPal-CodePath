@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import TeneesAPI from "../../services/tenees.js";
 import TeneeTile from "../../components/TeneeTile.jsx";
 import { Link } from "react-router-dom";
+import { Button } from "antd";
 
 const TeneesPage = ({ api_url, user }) => {
     const [tenees, setTenees] = useState([]);
@@ -83,6 +84,9 @@ const TeneesPage = ({ api_url, user }) => {
     return (
         <div>
             <h2>Welcome to the Tenees Page!</h2>
+            <Button style={{color: "blue"}}>
+                <Link to="/tenee/create">Create Post</Link>
+            </Button>
             <div>
                 {tenees.map((post) => (
                     <TeneeTile
@@ -95,7 +99,6 @@ const TeneesPage = ({ api_url, user }) => {
                     />
                 ))}
             </div>
-            <Link to="/tenee/create">Create Post</Link>
         </div>
     );
 };

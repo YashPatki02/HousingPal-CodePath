@@ -39,9 +39,15 @@ const verify = async (accessToken, refreshToken, profile, callback) => {
                 ]
             );
 
+            console.log("in verify")
+            console.log(user)
+
             const newUser = results.rows[0];
             return callback(null, newUser);
         }
+
+        console.log("in verify")
+        console.log(user)
 
         return callback(null, user);
     } catch (error) {

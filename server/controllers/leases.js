@@ -9,7 +9,6 @@ const createLeaseListing = async (req, res) => {
             appliances,
             amenities,
             preference_gender,
-            preference_age,
             other_preferences,
             deal_breakers,
             location,
@@ -17,16 +16,17 @@ const createLeaseListing = async (req, res) => {
             utilities,
             lease_length,
             start_date,
-            pictures,
+            contact_info,
+            university,
             user_id,
         } = req.body;
 
         const results = await pool.query(
             `INSERT INTO listings 
             (listing_type, tenant_names, room_setup, appliances, amenities, 
-                preference_gender, preference_age, other_preferences, 
-                deal_breakers, location, rent, utilities, lease_length, 
-                start_date, pictures, user_id)
+                preference_gender, other_preferences, deal_breakers, location, 
+                rent, utilities, lease_length, start_date, contact_info, 
+                university, user_id)
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, 
                 $11, $12, $13, $14, $15, $16)
             RETURNING *`,
@@ -37,7 +37,6 @@ const createLeaseListing = async (req, res) => {
                 appliances,
                 amenities,
                 preference_gender,
-                preference_age,
                 other_preferences,
                 deal_breakers,
                 location,
@@ -45,7 +44,8 @@ const createLeaseListing = async (req, res) => {
                 utilities,
                 lease_length,
                 start_date,
-                pictures,
+                contact_info,
+                university,
                 user_id,
             ]
         );
@@ -63,7 +63,6 @@ const updateLeaseListing = async (req, res) => {
         appliances,
         amenities,
         preference_gender,
-        preference_age,
         other_preferences,
         deal_breakers,
         location,
@@ -71,15 +70,16 @@ const updateLeaseListing = async (req, res) => {
         utilities,
         lease_length,
         start_date,
-        pictures
+        contact_info,
+        university,
     } = req.body;
 
     try {
         const results = await pool.query(
             `UPDATE listings SET room_setup = $1, appliances = $2, amenities = $3,
-            preference_gender = $4, preference_age = $5, other_preferences = $6,
-            deal_breakers = $7, location = $8, rent = $9, utilities = $10,
-            lease_length = $11, start_date = $12, pictures = $13
+            preference_gender = $4, other_preferences = $5, deal_breakers = $6,
+            location = $7, rent = $8, utilities = $9, lease_length = $10,
+            start_date = $11, contact_info = $12, university = $13
             WHERE id = $14
             RETURNING *`,
             [
@@ -87,7 +87,6 @@ const updateLeaseListing = async (req, res) => {
                 appliances,
                 amenities,
                 preference_gender,
-                preference_age,
                 other_preferences,
                 deal_breakers,
                 location,
@@ -95,7 +94,8 @@ const updateLeaseListing = async (req, res) => {
                 utilities,
                 lease_length,
                 start_date,
-                pictures,
+                contact_info,
+                university,
                 id,
             ]
         );
@@ -106,7 +106,7 @@ const updateLeaseListing = async (req, res) => {
 };
 
 const deleteLeaseListing = async (req, res) => {
-    const listingId  = req.params.id;
+    const listingId = req.params.id;
 
     try {
         const results = await pool.query(`DELETE FROM listings WHERE id = $1`, [
@@ -114,14 +114,13 @@ const deleteLeaseListing = async (req, res) => {
         ]);
 
         res.status(201).json(results.rowCount);
-
     } catch (error) {
         res.status(409).json({ error: error.message });
     }
 };
 
 const getLeaseListingById = async (req, res) => {
-    const listingId  = parseInt(req.params.id);
+    const listingId = parseInt(req.params.id);
 
     try {
         const results = await pool.query(
@@ -149,7 +148,7 @@ const getAllLeaseListings = async (req, res) => {
 };
 
 const getLeaseListingsByUserId = async (req, res) => {
-    const userId  = parseInt(req.params.userId);
+    const userId = parseInt(req.params.userId);
 
     try {
         const results = await pool.query(

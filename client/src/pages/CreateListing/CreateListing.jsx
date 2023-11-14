@@ -2,10 +2,9 @@ import React from "react";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router";
 import * as Yup from "yup";
-import LeaseAPI from '../../services/leases.js'
+import LeaseAPI from "../../services/leases.js";
 
 const CreateListing = ({ user, api_url }) => {
-
     const navigate = useNavigate();
 
     const initialValues = {
@@ -15,7 +14,6 @@ const CreateListing = ({ user, api_url }) => {
         appliances: "",
         amenities: "",
         preference_gender: "",
-        preference_age: "",
         other_preferences: "",
         deal_breakers: "",
         location: "",
@@ -23,7 +21,8 @@ const CreateListing = ({ user, api_url }) => {
         utilities: "",
         lease_length: "",
         start_date: "",
-        pictures: [],
+        contact_info: "",
+        university: "",
     };
 
     const validationSchema = Yup.object({
@@ -33,7 +32,6 @@ const CreateListing = ({ user, api_url }) => {
         appliances: Yup.string(),
         amenities: Yup.string(),
         preference_gender: Yup.string().required("Required"),
-        preference_age: Yup.string().required("Required"),
         other_preferences: Yup.string(),
         deal_breakers: Yup.string(),
         location: Yup.string().required("Required"),
@@ -41,6 +39,8 @@ const CreateListing = ({ user, api_url }) => {
         utilities: Yup.number().min(0).required("Required").min(0),
         lease_length: Yup.string().required("Required"),
         start_date: Yup.date().required("Required"),
+        contact_info: Yup.string().required("Required"),
+        university: Yup.string().required("Required"),
     });
 
     const onSubmit = async (values) => {
@@ -49,7 +49,7 @@ const CreateListing = ({ user, api_url }) => {
         const credentials = {
             user_id: parseInt(user.id),
             ...values,
-        }
+        };
 
         const response = await LeaseAPI.createLeaseListing(credentials);
         console.log(response);
@@ -78,9 +78,9 @@ const CreateListing = ({ user, api_url }) => {
                         value={formik.values.listing_type}
                     >
                         <option value="">Select a Listing Type</option>
-                        <option value="room">Room</option>
-                        <option value="apartment">Apartment</option>
-                        <option value="house">House</option>
+                        <option value="Lease">Lease</option>
+                        <option value="Sublease">Sublease</option>
+                        <option value="Other">Other</option>
                     </select>
                     {formik.touched.listing_type &&
                     formik.errors.listing_type ? (
@@ -112,8 +112,9 @@ const CreateListing = ({ user, api_url }) => {
                         value={formik.values.room_setup}
                     >
                         <option value="">Select a Room Setup</option>
-                        <option value="private">Private</option>
-                        <option value="shared">Shared</option>
+                        <option value="Single">Single</option>
+                        <option value="Double">Double</option>
+                        <option value="Other">Other</option>
                     </select>
                     {formik.touched.room_setup && formik.errors.room_setup ? (
                         <div>{formik.errors.room_setup}</div>
@@ -158,33 +159,13 @@ const CreateListing = ({ user, api_url }) => {
                         value={formik.values.preference_gender}
                     >
                         <option value="">Select a Preference Gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="No Preference">No Preference</option>
                     </select>
                     {formik.touched.preference_gender &&
                     formik.errors.preference_gender ? (
                         <div>{formik.errors.preference_gender}</div>
-                    ) : null}
-                </div>
-                <div>
-                    <label htmlFor="preference_age">Preference Age</label>
-                    <select
-                        id="preference_age"
-                        name="preference_age"
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.preference_age}
-                    >
-                        <option value="">Select a Preference Age</option>
-                        <option value="18-25">18-25</option>
-                        <option value="26-35">26-35</option>
-                        <option value="36-45">36-45</option>
-                        {/* Add more age ranges if needed */}
-                    </select>
-                    {formik.touched.preference_age &&
-                    formik.errors.preference_age ? (
-                        <div>{formik.errors.preference_age}</div>
                     ) : null}
                 </div>
                 <div>
@@ -289,22 +270,32 @@ const CreateListing = ({ user, api_url }) => {
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="pictures">Pictures</label>
+                    <label htmlFor="contact_info">Contact Info</label>
                     <input
-                        type="file"
-                        id="pictures"
-                        name="pictures"
-                        onChange={(event) => {
-                            formik.setFieldValue(
-                                "pictures",
-                                event.currentTarget.files
-                            );
-                        }}
+                        type="text"
+                        id="contact_info"
+                        name="contact_info"
+                        onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
-                        multiple
+                        value={formik.values.contact_info}
                     />
-                    {formik.touched.pictures && formik.errors.pictures ? (
-                        <div>{formik.errors.pictures}</div>
+                    {formik.touched.contact_info &&
+                    formik.errors.contact_info ? (
+                        <div>{formik.errors.contact_info}</div>
+                    ) : null}
+                </div>
+                <div>
+                    <label htmlFor="university">University</label>
+                    <input
+                        type="text"
+                        id="university"
+                        name="university"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.university}
+                    />
+                    {formik.touched.university && formik.errors.university ? (
+                        <div>{formik.errors.university}</div>
                     ) : null}
                 </div>
 

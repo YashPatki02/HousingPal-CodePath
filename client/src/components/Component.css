@@ -1,6 +1,5 @@
 .tenee-tile {
     background-color: #fff;
-    border: 1px solid #ddd;
     border-radius: 4px;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
@@ -9,8 +8,19 @@
     transition: all 0.3s ease-in-out;
 }
 
-.post-header {
+.lease-tile {
+    background-color: #fff;
     margin-bottom: 20px;
+    padding: 15px;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 10px 0;
 }
 
 .post-header-avatar {
@@ -25,7 +35,5 @@
     color: #333;
     font-size: 16px;
     font-weight: bold;
-    margin: 0;
-    padding-top: 5px;
 }
 

@@ -18,7 +18,8 @@ const TeneeEdit = ({ user }) => {
         deal_breakers: "",
         budget_min: 0,
         budget_max: 0,
-        picture: "",
+        contact_info: "",
+        university: "",
         user_id: 0,
     });
     const [loading, setLoading] = useState(true);
@@ -59,7 +60,8 @@ const TeneeEdit = ({ user }) => {
         deal_breakers: "",
         budget_min: 0,
         budget_max: 0,
-        picture: "",
+        contact_info: "",
+        university: "",
     };
 
     const validationSchema = Yup.object({
@@ -71,17 +73,21 @@ const TeneeEdit = ({ user }) => {
         deal_breakers: Yup.string(),
         budget_min: Yup.number().required("Required").min(1),
         budget_max: Yup.number().required("Required").min(1),
+        contact_info: Yup.string().required("Required"),
+        university: Yup.string().required("Required"),
     });
 
     const onSubmit = async (values) => {
-        console.log("Form data", values);
+        if (values.budget_min > values.budget_max) {
+            let temp = values.budget_min;
+            values.budget_min = values.budget_max;
+            values.budget_max = temp;
+        }
 
         const credentials = {
             id: parseInt(id),
             ...values,
         };
-
-        console.log(credentials);
 
         try {
             const response = await fetch(
@@ -133,9 +139,10 @@ const TeneeEdit = ({ user }) => {
                         value={formik.values.gender}
                     >
                         <option value="">Select a Gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Non-Binary">Non-Binary</option>
+                        <option value="Other">Other</option>
                     </select>
                     {formik.touched.gender && formik.errors.gender ? (
                         <div>{formik.errors.gender}</div>
@@ -242,21 +249,32 @@ const TeneeEdit = ({ user }) => {
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="picture">Profile Picture</label>
+                    <label htmlFor="contact_info">Contact Info</label>
                     <input
-                        type="file"
-                        id="picture"
-                        name="picture"
-                        onChange={(event) => {
-                            formik.setFieldValue(
-                                "picture",
-                                event.currentTarget.files[0]
-                            );
-                        }}
+                        type="text"
+                        id="contact_info"
+                        name="contact_info"
+                        onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
+                        value={formik.values.contact_info}
                     />
-                    {formik.touched.picture && formik.errors.picture ? (
-                        <div>{formik.errors.picture}</div>
+                    {formik.touched.contact_info &&
+                    formik.errors.contact_info ? (
+                        <div>{formik.errors.contact_info}</div>
+                    ) : null}
+                </div>
+                <div>
+                    <label htmlFor="university">University</label>
+                    <input
+                        type="text"
+                        id="university"
+                        name="university"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.university}
+                    />
+                    {formik.touched.university && formik.errors.university ? (
+                        <div>{formik.errors.university}</div>
                     ) : null}
                 </div>
                 <button type="submit">Submit</button>

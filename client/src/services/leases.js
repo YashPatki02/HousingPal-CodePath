@@ -9,7 +9,6 @@ const createLeaseListing = async (credentials) => {
         appliances,
         amenities,
         preference_gender,
-        preference_age,
         other_preferences,
         deal_breakers,
         location,
@@ -17,7 +16,8 @@ const createLeaseListing = async (credentials) => {
         utilities,
         lease_length,
         start_date,
-        pictures,
+        contact_info,
+        university
     } = credentials;
 
     const options = {
@@ -31,7 +31,6 @@ const createLeaseListing = async (credentials) => {
             appliances,
             amenities,
             preference_gender,
-            preference_age,
             other_preferences,
             deal_breakers,
             location,
@@ -39,7 +38,8 @@ const createLeaseListing = async (credentials) => {
             utilities,
             lease_length,
             start_date,
-            pictures,
+            contact_info,
+            university
         }),
     };
 
@@ -59,7 +59,6 @@ const updateLeaseListing = async (credentials) => {
         appliances,
         amenities,
         preference_gender,
-        preference_age,
         other_preferences,
         deal_breakers,
         location,
@@ -67,7 +66,8 @@ const updateLeaseListing = async (credentials) => {
         utilities,
         lease_length,
         start_date,
-        pictures,
+        contact_info,
+        university,
     } = credentials;
 
     const options = {
@@ -79,7 +79,6 @@ const updateLeaseListing = async (credentials) => {
             appliances,
             amenities,
             preference_gender,
-            preference_age,
             other_preferences,
             deal_breakers,
             location,
@@ -87,7 +86,8 @@ const updateLeaseListing = async (credentials) => {
             utilities,
             lease_length,
             start_date,
-            pictures,
+            contact_info,
+            university,
         }),
     };
 

@@ -4,13 +4,16 @@ import passport from "passport";
 const router = express.Router();
 
 router.get("/login/success", (req, res) => {
+    console.log("in routes")
+    console.log(req.user)
+    
     if (req.user) {
         res.status(200).json({ success: true, user: req.user });
     }
 });
 
 router.get("/login/failed", (req, res) => {
-    console.log("failuer")
+    console.log("failure")
     res.status(401).json({ success: true, message: "failure" });
 });
 

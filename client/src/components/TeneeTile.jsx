@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import './Component.css';
 import PostHeader from "./PostHeader";
-import { Row, Col, Button } from "antd";
+import { Row, Col, Button, Card } from "antd";
 import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 
 const TeneeTile = ({ tenee, post, user, favorited, favorite, unFavorite }) => {
@@ -39,7 +39,8 @@ const TeneeTile = ({ tenee, post, user, favorited, favorite, unFavorite }) => {
         deal_breakers,
         budget_min,
         budget_max,
-        picture,
+        contact_info,
+        university,
         user_id,
     } = teneePost;
 
@@ -49,37 +50,46 @@ const TeneeTile = ({ tenee, post, user, favorited, favorite, unFavorite }) => {
 
     return (
         <div className="tenee-tile">
-            <PostHeader user={user} />
-            <Button onClick={goToPost(id)}>View Tenee Post</Button>
-
-            {user_id !== user.id &&
-                (favorited ? (
-                    <button onClick={() => unFavorite(id)}>
-                        Unfavorite Post
-                    </button>
-                ) : (
-                    <button onClick={() => favorite(id)}>Favorite Post</button>
-                ))}
-
-            <h2>
-                {gender === "male"
-                    ? "Male"
-                    : gender === "female"
-                    ? "Female"
-                    : "Other"}{" "}
-                Tenee
-            </h2>
-            <p>Age: {age}</p>
-            <p>Bio: {bio}</p>
-            <p>
-                Budget Range: ${budget_min} - ${budget_max}/month
-            </p>
-            {/* {picture && (
-                <div>
-                    <p>Profile Picture:</p>
-                    <img src={picture} alt="Profile" />
-                </div>
-            )} */}
+            <Card
+                title={<PostHeader user={user} />}
+                extra={
+                    <>
+                        <Button onClick={goToPost(id)}>View Tenee Post</Button>
+                        {user_id !== user.id &&
+                            (favorited ? (
+                                <Button onClick={() => unFavorite(id)}>
+                                    <HeartFilled style={{ color: "red" }} />
+                                </Button>
+                            ) : (
+                                <Button onClick={() => favorite(id)}>
+                                    <HeartOutlined style={{ color: "red" }} />
+                                </Button>
+                            ))}
+                    </>
+                }
+                style={{
+                    width: 600,
+                    padding: "10px",
+                    backgroundColor: "#f0f2f5",
+                }}
+            >
+                <p>Name: {name}</p>
+                <p>University: {university}</p>
+                <p>Contact Info: {contact_info}</p>
+                <p>
+                    Gender:{" "}
+                    {gender === "male"
+                        ? "Male"
+                        : gender === "female"
+                        ? "Female"
+                        : "Other"}{" "}
+                </p>
+                <p>Age: {age}</p>
+                <p>Bio: {bio}</p>
+                <p>
+                    Budget Range: ${budget_min} - ${budget_max}/month
+                </p>
+            </Card>
         </div>
     );
 };

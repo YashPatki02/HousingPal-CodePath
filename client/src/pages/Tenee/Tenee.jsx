@@ -73,12 +73,9 @@ const Tenee = ({ user }) => {
                         Budget Range: ${post.budget_min} - ${post.budget_max}
                         /month
                     </p>
-                    {post.picture && (
-                        <div>
-                            <p>Profile Picture:</p>
-                            <img src={post.picture} alt="Profile" />
-                        </div>
-                    )}
+                    <p>Contact Info: {post.contact_info}</p>
+                    <p>Posted By: {post.user_id}</p>
+                    <p>University: {post.university}</p>
                 </div>
             ) : (
                 <p>Loading...</p>

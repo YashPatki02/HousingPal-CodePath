@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
+import { Button, Card } from "antd";
+import { HeartFilled, HeartOutlined } from "@ant-design/icons";
+import PostHeader from "./PostHeader";
+import "./Component.css";
 
 const LeaseTile = ({
     listing,
@@ -42,7 +46,6 @@ const LeaseTile = ({
         appliances,
         amenities,
         preference_gender,
-        preference_age,
         other_preferences,
         deal_breakers,
         location,
@@ -50,7 +53,8 @@ const LeaseTile = ({
         utilities,
         lease_length,
         start_date,
-        pictures,
+        contact_info,
+        university,
         user_id,
     } = leaseListing;
 
@@ -58,50 +62,58 @@ const LeaseTile = ({
         navigate(`/listing/${id}`);
     };
 
+    // const getUser = async (id) => {
+    //     try {
+    //         const response = await fetch(
+    //             `http://localhost:3001/api/users/${id}`
+    //         );
+    //         const data = await response.json();
+    //         return data;
+
+    //         console.log("User: ", data);
+    //     } catch (error) {
+    //         console.error("Error fetching user: ", error);
+    //     }
+    // };
+
     return (
         <div className="lease-tile">
-            <h2>{listing_type} Listing</h2>
-            <button onClick={goToListing(id)}>View Listing Details</button>
-
-            {user_id !== user.id &&
-                (favorited ? (
-                    <button onClick={() => unFavorite(id)}>
-                        Unfavorite Listing
-                    </button>
-                ) : (
-                    <button onClick={() => favorite(id)}>
-                        Favorite Listing
-                    </button>
-                ))}
-
-            <p>Tenants: {tenant_names}</p>
-            <p>Room Setup: {room_setup}</p>
-            <p>Appliances: {appliances}</p>
-            <p>Amenities: {amenities}</p>
-            <p>Preference Gender: {preference_gender}</p>
-            <p>Preference Age: {preference_age}</p>
-            <p>Other Preferences: {other_preferences}</p>
-            <p>Deal Breakers: {deal_breakers}</p>
-            <p>Location: {location}</p>
-            <p>Rent: ${rent}/month</p>
-            <p>Utilities: ${utilities ? utilities : "N/A"}/month</p>
-            <p>Lease Length: {lease_length} months</p>
-            <p>Start Date: {start_date}</p>
-            {/* You can display images here */}
-            {pictures && pictures.length > 0 && (
-                <div>
-                    <p>Images:</p>
-                    <div className="image-container">
-                        {pictures.map((image, index) => (
-                            <img
-                                key={index}
-                                src={image}
-                                alt={`Image ${index}`}
-                            />
-                        ))}
-                    </div>
-                </div>
-            )}
+            <Card
+                title={<PostHeader user={user} />}
+                extra={
+                    <>
+                        <Button onClick={goToListing(id)}>
+                            View Listing Details
+                        </Button>
+                        {user_id !== user.id &&
+                            (favorited ? (
+                                <Button onClick={() => unFavorite(id)}>
+                                    <HeartFilled style={{ color: "red" }} />
+                                </Button>
+                            ) : (
+                                <Button onClick={() => favorite(id)}>
+                                    <HeartOutlined style={{ color: "red" }} />
+                                </Button>
+                            ))}
+                    </>
+                }
+                style={{
+                    width: 600,
+                    padding: "10px",
+                    backgroundColor: "#f0f2f5",
+                }}
+            >
+                <p>Listing Type: {listing_type}</p>
+                <p>Tenants: {tenant_names}</p>
+                <p>Room Setup: {room_setup}</p>
+                <p>Preference Gender: {preference_gender}</p>
+                <p>Rent: ${rent}/month</p>
+                <p>Utilities: ${utilities ? utilities : "N/A"}/month</p>
+                <p>Lease Length: {lease_length} months</p>
+                <p>Start Date: {start_date}</p>
+                <p>Contact Info: {contact_info}</p>
+                <p>University: {university}</p>
+            </Card>
         </div>
     );
 };

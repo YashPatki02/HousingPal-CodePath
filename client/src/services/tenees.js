@@ -11,7 +11,8 @@ const createTeneesProfile = async (credentials) => {
         deal_breakers,
         budget_min,
         budget_max,
-        picture,
+        contact_info,
+        university,
         user_id,
     } = credentials;
 
@@ -28,7 +29,8 @@ const createTeneesProfile = async (credentials) => {
             deal_breakers,
             budget_min,
             budget_max,
-            picture,
+            contact_info,
+            university,
             user_id,
         }),
     };
@@ -52,7 +54,8 @@ const updateTeneesProfile = async (credentials) => {
         deal_breakers,
         budget_min,
         budget_max,
-        picture,
+        contact_info,
+        university,
     } = credentials;
     const options = {
         method: "PATCH",
@@ -66,7 +69,8 @@ const updateTeneesProfile = async (credentials) => {
             deal_breakers,
             budget_min,
             budget_max,
-            picture,
+            contact_info,
+            university,
         }),
     };
 

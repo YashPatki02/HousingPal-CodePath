@@ -20,28 +20,27 @@ const createUsersTable = async () => {
     }
 };
 
-const createUserDetailsTable = async () => {
-    const creasteUsersDetailsQuery = `
-    CREATE TABLE IF NOT EXISTS
-        users_details (
-            id SERIAL PRIMARY KEY,
-            user_id SERIAL REFERENCES users(id) ON DELETE CASCADE,
-            first_name VARCHAR(50) NOT NULL,
-            last_name VARCHAR(50) NOT NULL,
-            university VARCHAR(50) NOT NULL,
-            school_year VARCHAR(50) NOT NULL,
-            contact_info VARCHAR(50) NOT NULL,
-            user_type VARCHAR(50) NOT NULL,
-            onboarded BOOLEAN NOT NULL DEFAULT FALSE
-        )`;
+// const createUserDetailsTable = async () => {
+//     const creasteUsersDetailsQuery = `
+//     CREATE TABLE IF NOT EXISTS
+//         users_details (
+//             id SERIAL PRIMARY KEY,
+//             user_id SERIAL REFERENCES users(id) ON DELETE CASCADE,
+//             first_name VARCHAR(50) NOT NULL,
+//             last_name VARCHAR(50) NOT NULL,
+            
+            
+//             user_type VARCHAR(50) NOT NULL,
+//             onboarded BOOLEAN NOT NULL DEFAULT FALSE
+//         )`;
 
-    try {
-        const result = await pool.query(creasteUsersDetailsQuery);
-        console.log("🎉 users_details table created successfully");
-    } catch (error) {
-        console.log("🚨 error creating users_details table", error);
-    }
-};
+//     try {
+//         const result = await pool.query(creasteUsersDetailsQuery);
+//         console.log("🎉 users_details table created successfully");
+//     } catch (error) {
+//         console.log("🚨 error creating users_details table", error);
+//     }
+// };
 
 const createListingsTable = async () => {
     const createListingsQuery = `
@@ -53,7 +52,6 @@ const createListingsTable = async () => {
             room_setup VARCHAR(50) NOT NULL,
             appliances VARCHAR(50),
             amenities VARCHAR(50),
-            preference_age VARCHAR(30) NOT NULL,
             preference_gender VARCHAR(30) NOT NULL,
             other_preferences VARCHAR(250) ,
             deal_breakers VARCHAR(250) ,
@@ -62,7 +60,8 @@ const createListingsTable = async () => {
             utilities NUMERIC NOT NULL,
             lease_length VARCHAR(50) NOT NULL,
             start_date DATE NOT NULL,
-            pictures TEXT[],
+            contact_info VARCHAR(50) NOT NULL,
+            university VARCHAR(50) NOT NULL,
             user_id INTEGER NOT NULL REFERENCES users(id)
         )`;
 
@@ -88,9 +87,9 @@ const createTeneesProfilesTable = async () => {
             deal_breakers VARCHAR(250) ,
             budget_min NUMERIC NOT NULL,
             budget_max NUMERIC NOT NULL,
-            picture TEXT,
+            contact_info VARCHAR(50) NOT NULL,
+            university VARCHAR(50) NOT NULL,
             user_id INTEGER NOT NULL REFERENCES users(id)
-            
         )`;
 
     try {
@@ -136,7 +135,6 @@ const createTeneesFavoritesTable = async () => {
 };
 
 await createUsersTable();
-await createUserDetailsTable();
 await createListingsTable();
 await createTeneesProfilesTable();
 await createLeaseFavoritesTable();

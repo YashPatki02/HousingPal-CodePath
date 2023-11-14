@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import LeasesAPI from "../../services/leases.js";
 import LeaseTile from "../../components/LeaseTile";
 import { Link } from "react-router-dom";
+import { Button } from "antd";
 
 const ListingsPage = ({ api_url, user }) => {
     const [listings, setListings] = useState([]);
@@ -83,6 +84,9 @@ const ListingsPage = ({ api_url, user }) => {
     return (
         <div>
             <h2>Welcome to the Listings Page!</h2>
+            <Button>
+                <Link to="/listing/create">Create Listing</Link>
+            </Button>
             <div>
                 {listings.map((listing) => (
                     <LeaseTile
@@ -95,7 +99,6 @@ const ListingsPage = ({ api_url, user }) => {
                     />
                 ))}
             </div>
-            <Link to="/listing/create">Create Listing</Link>
         </div>
     );
 };

@@ -16,7 +16,7 @@ const app = express();
 
 app.use(
     session({
-        secret: "secret",
+        secret: "sq7taigbtwo2brby",
         resave: false,
         saveUninitialized: true,
     })
@@ -50,7 +50,7 @@ app.get("/", (req, res) => {
 app.use("/auth", authRoutes);
 
 // API Routes
-app.use("/api/users", usersRouter);
+// app.use("/api/users", usersRouter);
 app.use("/api/leases", leasesRouter);
 app.use("/api/tenees", teneesRouter);
 app.use("/api/favorites_leases", favoritesLeasesRouter);

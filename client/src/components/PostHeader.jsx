@@ -11,7 +11,7 @@ function PostHeader({ user }) {
                     alt={user.username}
                     className="post-header-avatar"
                 />
-                <span className="post-header-username">{user.username}</span>
+                <p className="post-header-username">{user.username}</p>
             </Col>
         </Row>
     );
