@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import './Component.css';
+import "./Component.css";
 import PostHeader from "./PostHeader";
 import { Row, Col, Button, Card } from "antd";
 import { HeartFilled, HeartOutlined } from "@ant-design/icons";
@@ -76,14 +76,7 @@ const TeneeTile = ({ tenee, post, user, favorited, favorite, unFavorite }) => {
                 <p>Name: {name}</p>
                 <p>University: {university}</p>
                 <p>Contact Info: {contact_info}</p>
-                <p>
-                    Gender:{" "}
-                    {gender === "male"
-                        ? "Male"
-                        : gender === "female"
-                        ? "Female"
-                        : "Other"}{" "}
-                </p>
+                <p>Gender: {gender}</p>
                 <p>Age: {age}</p>
                 <p>Bio: {bio}</p>
                 <p>

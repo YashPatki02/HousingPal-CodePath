@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useRoutes } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { Navigate } from "react-router-dom";
 
 import ListingsPage from "./pages/ListingsPage/ListingsPage";
 import Listing from "./pages/SingleListing/SingleListing";

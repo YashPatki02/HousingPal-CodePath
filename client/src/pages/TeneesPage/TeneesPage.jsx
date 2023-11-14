@@ -2,17 +2,22 @@ import React, { useEffect, useState } from "react";
 import TeneesAPI from "../../services/tenees.js";
 import TeneeTile from "../../components/TeneeTile.jsx";
 import { Link } from "react-router-dom";
-import { Button } from "antd";
+import { Button, Select, InputNumber, Form } from "antd";
+
+const { Option } = Select;
 
 const TeneesPage = ({ api_url, user }) => {
-    const [tenees, setTenees] = useState([]);
+    const [allTenees, setAllTenees] = useState([]);
+    const [filteredTenees, setFilteredTenees] = useState([]);
     const [favorites, setFavorites] = useState([]);
+    const [filterForm] = Form.useForm();
 
     useEffect(() => {
         const fetchProfiles = async () => {
             try {
                 const response = await TeneesAPI.getAllTeneesProfiles();
-                setTenees(response);
+                setAllTenees(response);
+                setFilteredTenees(response);
             } catch (error) {
                 console.error("Error fetching tenees: ", error);
             }
@@ -81,14 +86,69 @@ const TeneesPage = ({ api_url, user }) => {
         }
     };
 
+    const handleFilterChange = (values) => {
+        const filters = filterForm.getFieldsValue();
+        const filtered = applyFilters(allTenees, filters);
+        setFilteredTenees(filtered);
+    };
+
+    const applyFilters = (tenees, filters) => {
+        return tenees.filter((tenee) => {
+            return (
+                (!filters.gender || tenee.gender === filters.gender) &&
+                (!filters.age_min || tenee.age >= filters.age_min) &&
+                (!filters.age_max || tenee.age <= filters.age_max) &&
+                (!filters.rent_min || tenee.budget_max >= filters.rent_min) &&
+                (!filters.rent_max || tenee.budget_min <= filters.rent_max)
+            );
+        });
+    };
+
+    const resetFilters = () => {
+        filterForm.resetFields();
+        setFilteredTenees(allTenees);
+    };
+
     return (
         <div>
             <h2>Welcome to the Tenees Page!</h2>
-            <Button style={{color: "blue"}}>
+            <Button style={{ color: "blue" }}>
                 <Link to="/tenee/create">Create Post</Link>
             </Button>
+            <Form
+                form={filterForm}
+                layout="inline"
+                onFinish={handleFilterChange}
+            >
+                <Form.Item name="gender" label="Gender">
+                    <Select style={{ width: 120 }}>
+                        <Option value="Male">Male</Option>
+                        <Option value="Female">Female</Option>
+                        <Option value="Non-Binary">Non-Binary</Option>
+                        <Option value="Other">Other</Option>
+                    </Select>
+                </Form.Item>
+                <Form.Item name="age_min" label="Min Age">
+                    <InputNumber />
+                </Form.Item>
+                <Form.Item name="age_max" label="Max Age">
+                    <InputNumber />
+                </Form.Item>
+                <Form.Item name="rent_min" label="Min Rent">
+                    <InputNumber />
+                </Form.Item>
+                <Form.Item name="rent_max" label="Max Rent">
+                    <InputNumber />
+                </Form.Item>
+                <Form.Item>
+                    <Button type="primary" htmlType="submit">
+                        Apply Filters
+                    </Button>
+                    <Button onClick={resetFilters}>Reset Filters</Button>
+                </Form.Item>
+            </Form>
             <div>
-                {tenees.map((post) => (
+                {filteredTenees.map((post) => (
                     <TeneeTile
                         key={post.id}
                         tenee={post}
