@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LeaseTile from "../../components/LeaseTile";
 import TeneeTile from "../../components/TeneeTile";
+import { Row, Col, Divider } from "antd";
 
 const FavoritesPage = ({ user }) => {
     const [leases, setLeases] = useState([]);
@@ -131,11 +132,30 @@ const FavoritesPage = ({ user }) => {
 
     return (
         <div>
-            <h1>Favorited Leases </h1>
+            <Row
+                align="middle"
+                justify="space-around"
+                style={{ margin: "40px 0" }}
+            >
+                <h1 style={{ color: "#302C33" }}>Favorited Lease Listings</h1>
+            </Row>
             {leases.length === 0 ? (
-                <h3>No Favorited Leases</h3>
+                <Row
+                    align="middle"
+                    justify="space-around"
+                    style={{ margin: "40px 0" }}
+                >
+                    <h3 style={{ color: "#6a4087" }}>No Favorited Leases</h3>
+                </Row>
             ) : (
-                leases.map((lease) => (
+                <Row
+                justify="center"
+                align="middle"
+                style={{ marginBottom: "40px" }}
+            >
+                <Col span={22}>
+                    <Row wrap={true} justify="center" align="middle">
+                {leases.map((lease) => (
                     <LeaseTile
                         key={lease.id}
                         listing={lease}
@@ -145,14 +165,36 @@ const FavoritesPage = ({ user }) => {
                         favorite={favoriteLease}
                         unFavorite={unFavoriteLease}
                     />
-                ))
+                ))}
+                    </Row>
+                </Col>
+            </Row>
             )}
-            <br />
-            <h1>Favorited Tenees </h1>
+            <Divider />
+            <Row
+                align="middle"
+                justify="space-around"
+                style={{ margin: "40px 0" }}
+            >
+                <h1 style={{ color: "#302C33" }}>Favorited Tenee Profiles</h1>
+            </Row>
             {tenees.length === 0 ? (
-                <h3>No Favorited Tenees</h3>
+                <Row
+                    align="middle"
+                    justify="space-around"
+                    style={{ margin: "40px 0" }}
+                >
+                    <h3 style={{ color: "#6a4087" }}>No Favorited Tenees</h3>
+                </Row>
             ) : (
-                tenees.map((tenee) => (
+                <Row
+                justify="center"
+                align="middle"
+                style={{ marginBottom: "40px" }}
+                >
+                <Col span={22}>
+                    <Row wrap={true} justify="center" align="middle">
+                {tenees.map((tenee) => (
                     <TeneeTile
                         key={tenee.id}
                         tenee={tenee}
@@ -162,7 +204,10 @@ const FavoritesPage = ({ user }) => {
                         favorite={favoriteTenee}
                         unFavorite={unFavoriteTenee}
                     />
-                ))
+                ))}
+                    </Row>
+                </Col>
+            </Row>
             )}
         </div>
     );

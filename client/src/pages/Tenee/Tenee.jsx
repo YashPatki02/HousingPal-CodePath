@@ -75,7 +75,7 @@ const Tenee = ({ user }) => {
                             <Button
                                 type="none"
                                 className="button-inverse"
-                                onClick={() => deletePost(id)}
+                                onClick={deletePost(id)}
                                 style={{ marginLeft: "10px" }}
                             >
                                 Delete Post

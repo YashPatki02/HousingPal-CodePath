@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import "./Component.css";
 import PostHeader from "./PostHeader";
-import { Row, Col, Button, Card } from "antd";
+import { Row, Col, Button, Card, Divider } from "antd";
 import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 
 const TeneeTile = ({ tenee, post, user, favorited, favorite, unFavorite }) => {
@@ -137,6 +137,7 @@ const TeneeTile = ({ tenee, post, user, favorited, favorite, unFavorite }) => {
                             <h3 className="tile-label">{age}</h3>
                         </Col>
                     </Row>
+                    <Divider style={{margin: "10px 0px"}} />
                     <Row>
                         <h2>Preferences:</h2>
                     </Row>

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import LeaseTile from "../../components/LeaseTile";
 import TeneeTile from "../../components/TeneeTile";
-import {Row, Col} from 'antd'
+import { Row, Col, Divider, Button } from "antd";
+import { Link } from "react-router-dom";
 
 const UserProfile = ({ user }) => {
     const [listings, setListings] = useState([]);
@@ -47,40 +48,103 @@ const UserProfile = ({ user }) => {
 
     return (
         <div>
-            {user.avatarurl && (
-                <img
-                    src={user.avatarurl}
-                    alt="User avatar"
-                    style={{ width: "100px" }}
-                />
-            )}
-            <h2>Welcome to your user profile, {user.username}!</h2>
-            <h3>Your Lease Listings:</h3>
+            <Row align="middle" justify="center" style={{ marginTop: "40px" }}>
+                <Col span={12} align="middle">
+                    {user.avatarurl && (
+                        <img
+                            src={user.avatarurl}
+                            alt="User avatar"
+                            style={{
+                                width: "80px",
+                                borderRadius: "50%",
+                                marginTop: "20px",
+                            }}
+                        />
+                    )}
+                    <h1>Welcome back to your profile, {user.username}</h1>
+                </Col>
+            </Row>
+
+            <Divider />
+            <Row align="middle" justify="start" style={{ margin: "40px 80px" }}>
+                <h2 style={{ color: "#6a4087" }}>Your Lease Listings:</h2>
+            </Row>
 
             {listings.length === 0 ? (
-                <p>No lease listings found.</p>
+                <Col span={22}>
+                    <Row
+                        align="middle"
+                        justify="space-around"
+                        style={{ margin: "40px 0" }}
+                    >
+                        <h3 style={{ color: "#6a4087" }}>No Lease Listings.</h3>
+                    </Row>
+                    <Button className="button" type="none">
+                        <Link to="/listing/create">CREATE LISTING</Link>
+                    </Button>
+                </Col>
             ) : (
-                <div>
-                    {listings.map((listing) => (
-                        <LeaseTile
-                            key={listing.id}
-                            listing={listing}
-                            user={user}
-                        />
-                    ))}
-                </div>
+                <Row
+                    justify="center"
+                    align="middle"
+                    style={{ marginBottom: "40px" }}
+                >
+                    <Col span={22}>
+                        <Row wrap={true} justify="center" align="middle">
+                            {listings.map((listing) => (
+                                <LeaseTile
+                                    key={listing.id}
+                                    listing={listing}
+                                    user={user}
+                                />
+                            ))}
+                        </Row>
+                    </Col>
+                </Row>
             )}
-            
-            <br />
-            <h3>Your Tenee Posts:</h3>
+
+            <Divider />
+
+            <Row align="middle" justify="start" style={{ margin: "40px 80px" }}>
+                <h2 style={{ color: "#6a4087" }}>Your Tenee Posts:</h2>
+            </Row>
             {teneePosts.length === 0 ? (
-                <p>No tenee posts found.</p>
+                <Col span={22} style={{marginBottom: "100px"}}>
+                    <Row
+                        align="middle"
+                        justify="space-around"
+                        style={{ margin: "40px 0" }}
+                    >
+                        <h3 style={{ color: "#6a4087" }}>No Tenee Posts.</h3>
+                    </Row>
+                    <Row
+                        align="middle"
+                        justify="space-around"
+                        style={{ margin: "40px 0" }}
+                    >
+                        <Button className="button" type="none">
+                            <Link to="/tenee/create">CREATE POST</Link>
+                        </Button>
+                    </Row>
+                </Col>
             ) : (
-                <div>
-                    {teneePosts.map((post) => (
-                        <TeneeTile key={post.id} tenee={post} user={user}/>
-                    ))}
-                </div>
+                <Row
+                    justify="center"
+                    align="middle"
+                    style={{ marginBottom: "100px"}}
+                >
+                    <Col span={22}>
+                        <Row wrap={true} justify="center" align="middle">
+                            {teneePosts.map((post) => (
+                                <TeneeTile
+                                    key={post.id}
+                                    tenee={post}
+                                    user={user}
+                                />
+                            ))}
+                        </Row>
+                    </Col>
+                </Row>
             )}
         </div>
     );
