@@ -24,12 +24,12 @@ const Header = ({ logout, user }) => {
                 justify="space-between"
                 style={{
                     height: "80px",
-                    padding: "0 20px",
+                    padding: "0 60px",
                     borderBottom: "1px solid #B6ADBC",
                 }}
             >
                 <Col style={{ color: "#9511ED" }}>
-                    <h2 className="logo">HousingPal</h2>
+                    <h2 className="logo">HousingPal.</h2>
                 </Col>
                 <Col span={12} justify="end" align="middle">
                     <Menu

@@ -158,6 +158,7 @@ function App() {
                 <></>
             )}
             {element}
+            <Footer user={user} />
         </div>
     );
 }
