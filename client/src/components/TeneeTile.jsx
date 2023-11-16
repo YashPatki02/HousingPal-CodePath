@@ -5,7 +5,15 @@ import PostHeader from "./PostHeader";
 import { Row, Col, Button, Card, Divider } from "antd";
 import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 
-const TeneeTile = ({ tenee, post, user, favorited, favorite, unFavorite }) => {
+const TeneeTile = ({
+    api_url,
+    tenee,
+    post,
+    user,
+    favorited,
+    favorite,
+    unFavorite,
+}) => {
     const navigate = useNavigate();
     const [teneePost, setTeneePost] = useState(tenee);
     const [userListing, setUserListing] = useState({});
@@ -13,9 +21,7 @@ const TeneeTile = ({ tenee, post, user, favorited, favorite, unFavorite }) => {
     useEffect(() => {
         const getPost = async (id) => {
             try {
-                const response = await fetch(
-                    `http://localhost:3001/api/tenees/${id}`
-                );
+                const response = await fetch(`${api_url}/api/tenees/${id}`);
                 const data = await response.json();
                 setTeneePost(data);
             } catch (error) {
@@ -51,9 +57,7 @@ const TeneeTile = ({ tenee, post, user, favorited, favorite, unFavorite }) => {
     useEffect(() => {
         const getUser = async (id) => {
             try {
-                const response = await fetch(
-                    `http://localhost:3001/api/users/${id}`
-                );
+                const response = await fetch(`${api_url}/api/users/${id}`);
                 const data = await response.json();
                 setUserListing(data);
             } catch (error) {
@@ -61,7 +65,12 @@ const TeneeTile = ({ tenee, post, user, favorited, favorite, unFavorite }) => {
             }
         };
 
-        getUser(user_id);
+        if(user_id !== user.id) {
+            getUser(user_id);   
+        } else {
+            setUserListing(user);
+        }
+        
     }, [teneePost]);
 
     return (
@@ -153,7 +162,7 @@ const TeneeTile = ({ tenee, post, user, favorited, favorite, unFavorite }) => {
                             <h3 className="tile-label">{age}</h3>
                         </Col>
                     </Row>
-                    <Divider style={{margin: "10px 0px"}} />
+                    <Divider style={{ margin: "10px 0px" }} />
                     <Row>
                         <h2>Preferences:</h2>
                     </Row>

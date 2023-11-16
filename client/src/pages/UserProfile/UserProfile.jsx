@@ -4,7 +4,7 @@ import TeneeTile from "../../components/TeneeTile";
 import { Row, Col, Divider, Button } from "antd";
 import { Link } from "react-router-dom";
 
-const UserProfile = ({ user }) => {
+const UserProfile = ({ api_url, user }) => {
     const [listings, setListings] = useState([]);
     const [loading, setLoading] = useState(true);
     const [teneePosts, setTeneePosts] = useState([]);
@@ -13,7 +13,7 @@ const UserProfile = ({ user }) => {
         const fetchListings = async () => {
             try {
                 const response = await fetch(
-                    `http://localhost:3001/api/leases/user/${user.id}/`
+                    `${api_url}/api/leases/user/${user.id}/`
                 );
                 const data = await response.json();
                 setListings(data);
@@ -27,7 +27,7 @@ const UserProfile = ({ user }) => {
         const fetchPosts = async () => {
             try {
                 const response = await fetch(
-                    `http://localhost:3001/api/tenees/user/${user.id}/`
+                    `${api_url}/api/tenees/user/${user.id}/`
                 );
                 const data = await response.json();
                 setTeneePosts(data);
@@ -94,6 +94,7 @@ const UserProfile = ({ user }) => {
                             {listings.map((listing) => (
                                 <LeaseTile
                                     key={listing.id}
+                                    api_url={api_url}
                                     listing={listing}
                                     user={user}
                                 />
@@ -138,6 +139,7 @@ const UserProfile = ({ user }) => {
                             {teneePosts.map((post) => (
                                 <TeneeTile
                                     key={post.id}
+                                    api_url={api_url}
                                     tenee={post}
                                     user={user}
                                 />

@@ -6,6 +6,7 @@ import PostHeader from "./PostHeader";
 import "./Component.css";
 
 const LeaseTile = ({
+    api_url,
     listing,
     lease,
     user,
@@ -20,9 +21,7 @@ const LeaseTile = ({
     useEffect(() => {
         const getListing = async (id) => {
             try {
-                const response = await fetch(
-                    `http://localhost:3001/api/leases/${id}`
-                );
+                const response = await fetch(`${api_url}/api/leases/${id}`);
                 const data = await response.json();
                 setLeaseListing(data);
             } catch (error) {
@@ -64,9 +63,7 @@ const LeaseTile = ({
     useEffect(() => {
         const getUser = async (id) => {
             try {
-                const response = await fetch(
-                    `http://localhost:3001/api/users/${id}`
-                );
+                const response = await fetch(`${api_url}/api/users/${id}`);
                 const data = await response.json();
                 setUserListing(data);
             } catch (error) {
@@ -74,7 +71,11 @@ const LeaseTile = ({
             }
         };
 
-        getUser(user_id);
+        if (user_id !== user.id) {
+            getUser(user_id);
+        } else {
+            setUserListing(user);
+        }
     }, [leaseListing]);
 
     return (

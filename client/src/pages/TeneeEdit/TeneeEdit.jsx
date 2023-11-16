@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router";
 import * as Yup from "yup";
 import { Row, Col } from "antd";
 
-const TeneeEdit = ({ user }) => {
+const TeneeEdit = ({ api_url, user }) => {
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -27,9 +27,7 @@ const TeneeEdit = ({ user }) => {
     useEffect(() => {
         const fetchTenee = async () => {
             try {
-                const response = await fetch(
-                    `http://localhost:3001/api/tenees/${id}`
-                );
+                const response = await fetch(`${api_url}/api/tenees/${id}`);
                 const responseJson = await response.json();
                 setTenee(responseJson);
             } catch (error) {
@@ -90,16 +88,13 @@ const TeneeEdit = ({ user }) => {
         };
 
         try {
-            const response = await fetch(
-                `http://localhost:3001/api/tenees/${id}`,
-                {
-                    method: "PATCH",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(credentials),
-                }
-            );
+            const response = await fetch(`${api_url}/api/tenees/${id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(credentials),
+            });
 
             const responseJson = await response.json();
 

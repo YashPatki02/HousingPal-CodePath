@@ -3,7 +3,7 @@ import LeaseTile from "../../components/LeaseTile";
 import TeneeTile from "../../components/TeneeTile";
 import { Row, Col, Divider } from "antd";
 
-const FavoritesPage = ({ user }) => {
+const FavoritesPage = ({ api_url, user }) => {
     const [leases, setLeases] = useState([]);
     const [tenees, setTenees] = useState([]);
 
@@ -11,7 +11,7 @@ const FavoritesPage = ({ user }) => {
         const fetchLeases = async () => {
             try {
                 const response = await fetch(
-                    `http://localhost:3001/api/favorites_leases/${user.id}`
+                    `${api_url}/api/favorites_leases/${user.id}`
                 );
                 const data = await response.json();
                 setLeases(data);
@@ -23,7 +23,7 @@ const FavoritesPage = ({ user }) => {
         const fetchTenees = async () => {
             try {
                 const response = await fetch(
-                    `http://localhost:3001/api/favorites_tenees/${user.id}`
+                    `${api_url}/api/favorites_tenees/${user.id}`
                 );
                 const data = await response.json();
                 setTenees(data);
@@ -47,7 +47,7 @@ const FavoritesPage = ({ user }) => {
 
     const favoriteLease = async (id) => {
         try {
-            await fetch(`http://localhost:3001/api/favorites_leases`, {
+            await fetch(`${api_url}/api/favorites_leases`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -66,7 +66,7 @@ const FavoritesPage = ({ user }) => {
 
     const unFavoriteLease = async (id) => {
         try {
-            await fetch(`http://localhost:3001/api/favorites_leases/${id}`, {
+            await fetch(`${api_url}/api/favorites_leases/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -94,7 +94,7 @@ const FavoritesPage = ({ user }) => {
 
     const favoriteTenee = async (id) => {
         try {
-            await fetch(`http://localhost:3001/api/favorites_tenees`, {
+            await fetch(`${api_url}/api/favorites_tenees`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -113,7 +113,7 @@ const FavoritesPage = ({ user }) => {
 
     const unFavoriteTenee = async (id) => {
         try {
-            await fetch(`http://localhost:3001/api/favorites_tenees/${id}`, {
+            await fetch(`${api_url}/api/favorites_tenees/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -158,6 +158,7 @@ const FavoritesPage = ({ user }) => {
                 {leases.map((lease) => (
                     <LeaseTile
                         key={lease.id}
+                        api_url={api_url}
                         listing={lease}
                         lease={lease}
                         user={user}
@@ -197,6 +198,7 @@ const FavoritesPage = ({ user }) => {
                 {tenees.map((tenee) => (
                     <TeneeTile
                         key={tenee.id}
+                        api_url={api_url}
                         tenee={tenee}
                         post={tenee}
                         user={user}

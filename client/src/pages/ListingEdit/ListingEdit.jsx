@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router";
 import * as Yup from "yup";
 import { Row, Col } from "antd";
 
-const ListingEdit = ({ user }) => {
+const ListingEdit = ({ api_url, user }) => {
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -30,9 +30,7 @@ const ListingEdit = ({ user }) => {
     useEffect(() => {
         const fetchListing = async () => {
             try {
-                const response = await fetch(
-                    `http://localhost:3001/api/leases/${id}`
-                );
+                const response = await fetch(`${api_url}/api/leases/${id}`);
                 const responseJson = await response.json();
                 setListing(responseJson);
             } catch (error) {
@@ -93,16 +91,13 @@ const ListingEdit = ({ user }) => {
         };
 
         try {
-            const response = await fetch(
-                `http://localhost:3001/api/leases/${id}`,
-                {
-                    method: "PATCH",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(credentials),
-                }
-            );
+            const response = await fetch(`${api_url}/api/leases/${id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(credentials),
+            });
 
             const responseJson = await response.json();
 

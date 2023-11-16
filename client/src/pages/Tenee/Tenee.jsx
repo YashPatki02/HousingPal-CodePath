@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Button, Col, Divider } from "antd";
 
-const Tenee = ({ user }) => {
+const Tenee = ({ api_url, user }) => {
     const { id } = useParams();
     const [post, setPost] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -15,9 +15,7 @@ const Tenee = ({ user }) => {
         const fetchPost = async () => {
             setLoading(true);
             try {
-                const response = await fetch(
-                    `http://localhost:3001/api/tenees/${id}`
-                );
+                const response = await fetch(`${api_url}/api/tenees/${id}`);
                 const data = await response.json();
                 setPost(data);
             } catch (error) {
@@ -37,12 +35,9 @@ const Tenee = ({ user }) => {
 
     const deletePost = (id) => async () => {
         try {
-            const response = await fetch(
-                `http://localhost:3001/api/tenees/${id}`,
-                {
-                    method: "DELETE",
-                }
-            );
+            const response = await fetch(`${api_url}/api/tenees/${id}`, {
+                method: "DELETE",
+            });
             const data = await response.json();
         } catch (error) {
             console.error("Error deleting post: ", error);

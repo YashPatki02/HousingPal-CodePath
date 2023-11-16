@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Button, Result, Spin, Row, Col, Divider } from "antd";
 
-const Listing = ({ user }) => {
+const Listing = ({ api_url, user }) => {
     const { id } = useParams();
     const [listing, setListing] = useState(null);
     const [isOwner, setIsOwner] = useState(false);
@@ -12,9 +12,7 @@ const Listing = ({ user }) => {
     useEffect(() => {
         const fetchListing = async () => {
             try {
-                const response = await fetch(
-                    `http://localhost:3001/api/leases/${id}`
-                );
+                const response = await fetch(`${api_url}/api/leases/${id}`);
                 const data = await response.json();
                 setListing(data);
                 setLoading(false);
@@ -35,12 +33,9 @@ const Listing = ({ user }) => {
 
     const deleteListing = async (id) => {
         try {
-            const response = await fetch(
-                `http://localhost:3001/api/leases/${id}`,
-                {
-                    method: "DELETE",
-                }
-            );
+            const response = await fetch(`${api_url}/api/leases/${id}`, {
+                method: "DELETE",
+            });
             const data = await response.json();
             navigate("/");
         } catch (error) {

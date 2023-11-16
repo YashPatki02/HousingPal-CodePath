@@ -1,7 +1,7 @@
 import React from "react";
 
 const Login = ({api_url}) => {
-    const AUTH_URL = `http://localhost:3001/auth/github`;
+    const AUTH_URL = `${api_url}/auth/github`;
 
     return (
         <div className="Login">

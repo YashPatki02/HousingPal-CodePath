@@ -19,7 +19,10 @@ import Footer from "./components/Footer";
 import "./App.css";
 
 function App() {
-    const API_URL = "http://localhost:3001";
+    const API_URL =
+        process.env.NODE_ENV === "production"
+            ? "https://???.up.railway.app"
+            : "http://localhost:3001";
 
     const [user, setUser] = useState({
         id: 1,

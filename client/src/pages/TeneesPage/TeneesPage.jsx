@@ -50,7 +50,7 @@ const TeneesPage = ({ api_url, user }) => {
 
     const favorite = async (id) => {
         try {
-            await fetch(`http://localhost:3001/api/favorites_tenees`, {
+            await fetch(`${api_url}/api/favorites_tenees`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -69,7 +69,7 @@ const TeneesPage = ({ api_url, user }) => {
 
     const unFavorite = async (id) => {
         try {
-            await fetch(`http://localhost:3001/api/favorites_tenees/${id}`, {
+            await fetch(`${api_url}/api/favorites_tenees/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -190,6 +190,7 @@ const TeneesPage = ({ api_url, user }) => {
                         {filteredTenees.map((post) => (
                             <TeneeTile
                                 key={post.id}
+                                api_url={api_url}
                                 tenee={post}
                                 user={user}
                                 favorited={checkFavorited(post.id)}

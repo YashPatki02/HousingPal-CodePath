@@ -50,7 +50,7 @@ const ListingsPage = ({ api_url, user }) => {
 
     const favorite = async (id) => {
         try {
-            await fetch(`http://localhost:3001/api/favorites_leases`, {
+            await fetch(`${api_url}/api/favorites_leases`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -69,7 +69,7 @@ const ListingsPage = ({ api_url, user }) => {
 
     const unFavorite = async (id) => {
         try {
-            await fetch(`http://localhost:3001/api/favorites_leases/${id}`, {
+            await fetch(`${api_url}/api/favorites_leases/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -197,6 +197,7 @@ const ListingsPage = ({ api_url, user }) => {
                         {filteredListings.map((listing) => (
                             <LeaseTile
                                 key={listing.id}
+                                api_url={api_url}
                                 listing={listing}
                                 user={user}
                                 favorited={checkFavorited(listing.id)}
