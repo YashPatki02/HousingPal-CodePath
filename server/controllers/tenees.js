@@ -17,8 +17,6 @@ const createTeneesProfile = async (req, res) => {
             user_id,
         } = req.body;
 
-        console.log(req.body);
-
         const results = await pool.query(
             `INSERT INTO tenees 
             (gender, age, bio, hobbies_interests, preferences, deal_breakers, budget_min, budget_max, user_id, name, contact_info,

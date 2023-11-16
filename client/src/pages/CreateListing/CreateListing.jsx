@@ -47,15 +47,12 @@ const CreateListing = ({ user, api_url }) => {
     });
 
     const onSubmit = async (values) => {
-        console.log("Form data", values);
-
         const credentials = {
             user_id: parseInt(user.id),
             ...values,
         };
 
         const response = await LeaseAPI.createLeaseListing(credentials);
-        console.log(response);
 
         formik.resetForm();
         navigate(`/`);

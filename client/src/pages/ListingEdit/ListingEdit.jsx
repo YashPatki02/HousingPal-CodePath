@@ -87,14 +87,10 @@ const ListingEdit = ({ user }) => {
     });
 
     const onSubmit = async (values) => {
-        console.log("Form data", values);
-
         const credentials = {
             id: parseInt(id),
             ...values,
         };
-
-        console.log(credentials);
 
         try {
             const response = await fetch(
