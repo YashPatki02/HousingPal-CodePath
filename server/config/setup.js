@@ -1,6 +1,28 @@
 import { pool } from "./database.js";
 import "./dotenv.js";
 
+const resetTables = async () => {
+    const dropUsersTableQuery = "DROP TABLE IF EXISTS users CASCADE";
+    const dropListingsTableQuery = "DROP TABLE IF EXISTS listings CASCADE";
+    const dropTeneesProfilesTableQuery =
+        "DROP TABLE IF EXISTS tenees CASCADE";
+    const dropLeaseFavoritesTableQuery =
+        "DROP TABLE IF EXISTS lease_favorites CASCADE";
+    const dropTeneesFavoritesTableQuery =
+        "DROP TABLE IF EXISTS tenees_favorites CASCADE";
+
+    try {
+        await pool.query(dropUsersTableQuery);
+        await pool.query(dropListingsTableQuery);
+        await pool.query(dropTeneesProfilesTableQuery);
+        await pool.query(dropLeaseFavoritesTableQuery);
+        await pool.query(dropTeneesFavoritesTableQuery);
+        console.log("🎉 tables dropped successfully");
+    } catch (error) {
+        console.error("⚠️ error dropping tables", error);
+    }
+};
+
 const createUsersTable = async () => {
     const createUsersTableQuery = `
     CREATE TABLE IF NOT EXISTS users (

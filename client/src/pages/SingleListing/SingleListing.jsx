@@ -360,7 +360,7 @@ const Listing = ({ user }) => {
                         <Row
                             align="middle"
                             justify="space-between"
-                            style={{ margin: "10px 0 10px 10px" }}
+                            style={{ margin: "10px 0 80px 10px" }}
                         >
                             <Col>
                                 <h3 style={{ color: "#302C33" }}>

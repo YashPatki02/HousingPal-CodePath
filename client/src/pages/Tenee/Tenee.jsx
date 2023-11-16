@@ -265,7 +265,7 @@ const Tenee = ({ user }) => {
                         <Row
                             align="middle"
                             justify="space-between"
-                            style={{ margin: "10px 0 10px 10px" }}
+                            style={{ margin: "10px 0 80px 10px" }}
                         >
                             <Col>
                                 <h3 style={{ color: "#302C33" }}>
@@ -300,33 +300,6 @@ const Tenee = ({ user }) => {
                 )}
             </Col>
         </Row>
-
-        // <div>
-        //     <h2>Tenee</h2>
-
-        //     {post ? (
-        //         <div className="tenee-tile">
-        //             <h3>
-        //                 {post.gender === "male"
-        //                     ? "Male"
-        //                     : post.gender === "female"
-        //                     ? "Female"
-        //                     : "Other"}{" "}
-        //                 Tenee
-        //             </h3>
-        //             <p>Age: {post.age}</p>
-        //             <p>Bio: {post.bio}</p>
-        //             <p>Hobbies/Interests: {post.hobbies_interests}</p>
-        //             <p>Preferences: {post.preferences}</p>
-        //             <p>Deal Breakers: {post.deal_breakers}</p>
-        //             <p>
-        //                 Budget Range: ${post.budget_min} - ${post.budget_max}
-        //                 /month
-        //             </p>
-        //             <p>Contact Info: {post.contact_info}</p>
-        //             <p>Posted By: {post.user_id}</p>
-        //             <p>University: {post.university}</p>
-        //         </div>
     );
 };
 
