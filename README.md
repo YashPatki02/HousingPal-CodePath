@@ -33,6 +33,11 @@ Backend: Node.js, Express.js, Passport.js, PostgreSQL
 ### 1. Users Table on the Database
 
 ✅ Users table is created on the database (GitHub Info).
+❌ Users can login via GitHub OAuth.
+❌ Users can logout.
+❌ Different users can create listings, profiles, favorites, and user profiles.
+
+While the users table is created on the database and login successfully created a user on the database, I was unable to implement the GitHub login and retrieve the logged in user from the database. So even though the user's profile could be seen in my database on Railway, fetching the user from the `login.success` route returned an empty user object. Despite spending time trying to debug this issue, I wasn't able to figure out the solution in time.
 
 ![Users Table]('../../gifs/1.users-table.gif)
 
