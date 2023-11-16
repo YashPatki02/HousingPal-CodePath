@@ -21,7 +21,7 @@ import "./App.css";
 function App() {
     const API_URL =
         process.env.NODE_ENV === "production"
-            ? "https://???.up.railway.app"
+            ? "https://housingpal-codepath-server.up.railway.app"
             : "http://localhost:3001";
 
     const [user, setUser] = useState({

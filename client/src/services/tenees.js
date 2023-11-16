@@ -1,4 +1,7 @@
-const API_URL = "http://localhost:3001/api/tenees";
+const API_URL =
+    process.env.NODE_ENV === "production"
+        ? "https://housingpal-codepath-server.up.railway.app/api/tenees"
+        : "http://localhost:3001/api/tenees";
 
 const createTeneesProfile = async (credentials) => {
     const {

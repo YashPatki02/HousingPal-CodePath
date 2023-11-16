@@ -1,4 +1,7 @@
-const API_URL = "http://localhost:3001/api/leases";
+const API_URL =
+    process.env.NODE_ENV === "production"
+        ? "https://housingpal-codepath-server.up.railway.app/api/leases"
+        : "http://localhost:3001/api/leases";
 
 const createLeaseListing = async (credentials) => {
     const {
@@ -17,7 +20,7 @@ const createLeaseListing = async (credentials) => {
         lease_length,
         start_date,
         contact_info,
-        university
+        university,
     } = credentials;
 
     const options = {
@@ -39,7 +42,7 @@ const createLeaseListing = async (credentials) => {
             lease_length,
             start_date,
             contact_info,
-            university
+            university,
         }),
     };
 
