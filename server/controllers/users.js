@@ -7,7 +7,7 @@ const getUserById = async (req, res) => {
         const results = await pool.query(`SELECT * FROM users WHERE id = $1`, [
             id,
         ]);
-        res.status(201).json(results.rows);
+        res.status(201).json(results.rows[0]);
     } catch (error) {
         res.status(409).json({ error: error.message });
     }

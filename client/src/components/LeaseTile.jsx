@@ -15,6 +15,7 @@ const LeaseTile = ({
 }) => {
     const navigate = useNavigate();
     const [leaseListing, setLeaseListing] = useState(listing);
+    const [userListing, setUserListing] = useState({});
 
     useEffect(() => {
         const getListing = async (id) => {
@@ -29,11 +30,9 @@ const LeaseTile = ({
             }
         };
 
-        // If leaseListing is null, fetch the listing
         if (!leaseListing.rent) {
             getListing(lease.listing_id);
         } else {
-            // Otherwise, set the listing to the leaseListing
             return;
         }
     }, []);
@@ -62,24 +61,26 @@ const LeaseTile = ({
         navigate(`/listing/${id}`);
     };
 
-    // const getUser = async (id) => {
-    //     try {
-    //         const response = await fetch(
-    //             `http://localhost:3001/api/users/${id}`
-    //         );
-    //         const data = await response.json();
-    //         return data;
+    useEffect(() => {
+        const getUser = async (id) => {
+            try {
+                const response = await fetch(
+                    `http://localhost:3001/api/users/${id}`
+                );
+                const data = await response.json();
+                setUserListing(data);
+            } catch (error) {
+                console.error("Error fetching user: ", error);
+            }
+        };
 
-    //         console.log("User: ", data);
-    //     } catch (error) {
-    //         console.error("Error fetching user: ", error);
-    //     }
-    // };
+        getUser(user_id);
+    }, [leaseListing]);
 
     return (
         <div className="lease-tile">
             <Card
-                title={<PostHeader user={user} />}
+                title={<PostHeader user={userListing} />}
                 extra={
                     <>
                         <Button onClick={goToListing(id)}>View Details</Button>
@@ -227,7 +228,9 @@ const LeaseTile = ({
                             </h3>
                         </Col>
                         <Col>
-                            <h3 className="tile-label">{lease_length} months</h3>
+                            <h3 className="tile-label">
+                                {lease_length} months
+                            </h3>
                         </Col>
                     </Row>
                     <Row
@@ -241,7 +244,7 @@ const LeaseTile = ({
                             </h3>
                         </Col>
                         <Col>
-                            <h3 className="tile-label">{start_date.substring(0, 10)}</h3>
+                            <h3 className="tile-label">{start_date}</h3>
                         </Col>
                     </Row>
                 </Col>

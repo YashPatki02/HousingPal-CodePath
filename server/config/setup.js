@@ -20,27 +20,6 @@ const createUsersTable = async () => {
     }
 };
 
-// const createUserDetailsTable = async () => {
-//     const creasteUsersDetailsQuery = `
-//     CREATE TABLE IF NOT EXISTS
-//         users_details (
-//             id SERIAL PRIMARY KEY,
-//             user_id SERIAL REFERENCES users(id) ON DELETE CASCADE,
-//             first_name VARCHAR(50) NOT NULL,
-//             last_name VARCHAR(50) NOT NULL,
-            
-            
-//             user_type VARCHAR(50) NOT NULL,
-//             onboarded BOOLEAN NOT NULL DEFAULT FALSE
-//         )`;
-
-//     try {
-//         const result = await pool.query(creasteUsersDetailsQuery);
-//         console.log("🎉 users_details table created successfully");
-//     } catch (error) {
-//         console.log("🚨 error creating users_details table", error);
-//     }
-// };
 
 const createListingsTable = async () => {
     const createListingsQuery = `

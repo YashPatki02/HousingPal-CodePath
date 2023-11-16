@@ -8,6 +8,7 @@ import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 const TeneeTile = ({ tenee, post, user, favorited, favorite, unFavorite }) => {
     const navigate = useNavigate();
     const [teneePost, setTeneePost] = useState(tenee);
+    const [userListing, setUserListing] = useState({});
 
     useEffect(() => {
         const getPost = async (id) => {
@@ -22,7 +23,6 @@ const TeneeTile = ({ tenee, post, user, favorited, favorite, unFavorite }) => {
             }
         };
 
-        // If teneePost is null, fetch the post
         if (!teneePost.name) {
             getPost(post.tenees_id);
         }
@@ -48,10 +48,26 @@ const TeneeTile = ({ tenee, post, user, favorited, favorite, unFavorite }) => {
         navigate(`/tenee/${id}`);
     };
 
+    useEffect(() => {
+        const getUser = async (id) => {
+            try {
+                const response = await fetch(
+                    `http://localhost:3001/api/users/${id}`
+                );
+                const data = await response.json();
+                setUserListing(data);
+            } catch (error) {
+                console.error("Error fetching user: ", error);
+            }
+        };
+
+        getUser(user_id);
+    }, [teneePost]);
+
     return (
         <div className="tenee-tile">
             <Card
-                title={<PostHeader user={user} />}
+                title={<PostHeader user={userListing} />}
                 extra={
                     <>
                         <Button onClick={goToPost(id)}>View Tenee Post</Button>
