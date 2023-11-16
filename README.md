@@ -4,7 +4,7 @@ CodePath WEB103 Final Project
 
 Designed and developed by: Yash Patki
 
-🔗 Link to deployed app:
+🔗 Link to deployed app: [HousingPal Web App](https://housingpal-codepath-client.up.railway.app/)
 
 ## About
 
