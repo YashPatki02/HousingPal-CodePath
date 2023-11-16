@@ -34,7 +34,7 @@ Backend: Node.js, Express.js, Passport.js, PostgreSQL
 
 ✅ Users table is created on the database (GitHub Info).
 
-![Users Table](../web103_finalproject/gifs/1.users-table.gif)
+![Users Table]('../../gifs/1.users-table.gif)
 
 ### 2. Users (Tenants) can Post a Listing for a Lease/Sublease
 
@@ -43,7 +43,7 @@ Backend: Node.js, Express.js, Passport.js, PostgreSQL
 ✅ All users can view all listings.
 ✅ Users can click on individual listings to view more details.
 
-![Post Listing](../web103_finalproject/gifs/2.create-lease-listing.gif)
+![Post Listing]('../../gifs/2.create-lease-listing.gif)
 
 ### 3. Users (Looking for Housing) can Post Profile
 
@@ -52,13 +52,13 @@ Backend: Node.js, Express.js, Passport.js, PostgreSQL
 ✅ All users can view all profiles.
 ✅ Users can click on individual profiles to view more details.
 
-![Post Profile](../web103_finalproject/gifs/3.create-profile.gif)
+![Post Profile]('../../gifs/3.create-profile.gif)
 
 ### 4. All Users can switch between the Listings, Profiles, Favorites, and User Profile pages
 
 ✅ Users can switch between the Listings, Profiles, Favorites, and User Profile pages using the navigation bar.
 
-![Navigation Bar](../web103_finalproject/gifs/4.routing.gif)
+![Navigation Bar]('../../gifs/4.routing.gif)
 
 ### 5. Users can filter Listings and Profiles
 
@@ -67,31 +67,31 @@ Backend: Node.js, Express.js, Passport.js, PostgreSQL
   - [x] Preferences/Criteria
   - [x] Other details
 
-![Filtering Listings and Profiles](../web103_finalproject/gifs/5.filtering.gif)
+![Filtering Listings and Profiles]('../../gifs/5.filtering.gif)
 
 ### 6. Users have basic CRUD functionality for Listings and Profiles
 
 ✅ Users can create, read, update, and delete Listings.
 
-![CRUD Listings](../web103_finalproject/gifs/6a.crud-listings.gif)
+![CRUD Listings]('../../gifs/6a.crud-listings.gif)
 
 ✅ Users can create, read, update, and delete Profiles.
 
-![CRUD Profiles](../web103_finalproject/gifs/6b.crud-profiles.gif)
+![CRUD Profiles]('../../gifs/6b.crud-profiles.gif)
 
 
 ### 7. Users can view their own Listings and Profiles in their User Profile page
 
 ✅ Users can view their own Listings and Profiles in their ``User Profile`` page.
 
-![User Profile](../web103_finalproject/gifs/7.user-profile.gif)
+![User Profile]('../../gifs/7.user-profile.gif)
 
 ### 8. Users can favorite Listings and Profiles
 
 ✅ Users can favorite Listings and Profiles that are not created by them.
 ✅ Users can view their favorited Listings and Profiles in the ``Favorites`` page.
 
-![Favoriting Listings and Profiles](../web103_finalproject/gifs/8.favorite.gif)
+![Favoriting Listings and Profiles]('../../gifs/8.favorite.gif)
 
 ### 9. All data is persisted in a PostgreSQL database using Railway
 
