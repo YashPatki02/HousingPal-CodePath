@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import LeasesAPI from "../../services/leases.js";
 import LeaseTile from "../../components/LeaseTile";
 import { Link } from "react-router-dom";
-import { Button, Select, InputNumber, Form } from "antd";
+import { Button, Select, InputNumber, Form, Row, Col, Divider } from "antd";
 
 const { Option } = Select;
 
@@ -114,61 +114,99 @@ const ListingsPage = ({ api_url, user }) => {
 
     return (
         <div>
-            <h2>Welcome to the Listings Page!</h2>
-            <Button>
-                <Link to="/listing/create">Create Listing</Link>
-            </Button>
-            <Form
-                form={filterForm}
-                layout="inline"
-                onFinish={handleFilterChange}
+            <Row
+                align="middle"
+                justify="space-around"
+                style={{
+                    margin: "40px 0px",
+                }}
             >
-                <Form.Item name="listing_type" label="Listing Type">
-                    <Select style={{ width: 120 }}>
-                        <Option value="Lease">Lease</Option>
-                        <Option value="Sublease">Sublease</Option>
-                        <Option value="Other">Other</Option>
-                    </Select>
-                </Form.Item>
-                <Form.Item name="room_setup" label="Room Setup">
-                    <Select style={{ width: 120 }}>
-                        <Option value="Single">Single</Option>
-                        <Option value="Double">Double</Option>
-                        <Option value="Other">Other</Option>
-                    </Select>
-                </Form.Item>
-                <Form.Item name="gender_preference" label="Gender Preference">
-                    <Select style={{ width: 120 }}>
-                        <Option value="Male">Male</Option>
-                        <Option value="Female">Female</Option>
-                        <Option value="Non-Binary">Non-Binary</Option>
-                        <Option value="Other">Other</Option>
-                    </Select>
-                </Form.Item>
-                <Form.Item name="rent" label="Desired Rent">
-                    <InputNumber />
-                </Form.Item>
-                <Form.Item>
-                    <Button type="primary" htmlType="submit">
-                        Apply Filters
+                <Col>
+                    <h1 style={{ color: "#302C33" }}>Lease Listings</h1>
+                </Col>
+                <Col>
+                    <Button className="button" type="none">
+                        <Link to="/listing/create">CREATE LISTING</Link>
                     </Button>
-                    <Button onClick={resetFilters}>
-                        Reset Filters
-                    </Button>
-                </Form.Item>
-            </Form>
-            <div>
-                {filteredListings.map((listing) => (
-                    <LeaseTile
-                        key={listing.id}
-                        listing={listing}
-                        user={user}
-                        favorited={checkFavorited(listing.id)}
-                        favorite={favorite}
-                        unFavorite={unFavorite}
-                    />
-                ))}
-            </div>
+                </Col>
+            </Row>
+            <Divider />
+            <Row align="middle" justify="center">
+                <Col>
+                    <h2 style={{ color: "#6A4087" }}>Filter Listings:</h2>
+                    <Form
+                        form={filterForm}
+                        layout="inline"
+                        onFinish={handleFilterChange}
+                        style={{ margin: "20px 0px" }}
+                    >
+                        <Form.Item name="listing_type" label="Listing Type">
+                            <Select style={{ width: 120 }}>
+                                <Option value="Lease">Lease</Option>
+                                <Option value="Sublease">Sublease</Option>
+                                <Option value="Other">Other</Option>
+                            </Select>
+                        </Form.Item>
+                        <Form.Item name="room_setup" label="Room Setup">
+                            <Select style={{ width: 120 }}>
+                                <Option value="Single">Single</Option>
+                                <Option value="Double">Double</Option>
+                                <Option value="Other">Other</Option>
+                            </Select>
+                        </Form.Item>
+                        <Form.Item
+                            name="gender_preference"
+                            label="Gender Preference"
+                        >
+                            <Select style={{ width: 120 }}>
+                                <Option value="Male">Male</Option>
+                                <Option value="Female">Female</Option>
+                                <Option value="Non-Binary">Non-Binary</Option>
+                                <Option value="Other">Other</Option>
+                            </Select>
+                        </Form.Item>
+                        <Form.Item name="rent" label="Desired Rent">
+                            <InputNumber />
+                        </Form.Item>
+                        <Form.Item>
+                            <Button
+                                type="none"
+                                htmlType="submit"
+                                className="button"
+                            >
+                                Apply Filters
+                            </Button>
+                        </Form.Item>
+                        <Form.Item>
+                            <Button
+                                type="none"
+                                onClick={resetFilters}
+                                className="button-inverse"
+                            >
+                                Reset Filters
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                </Col>
+            </Row>
+            <Divider />
+
+            <Row justify="center" align="middle" style={{marginBottom: "40px"}}>
+                <Col span={22}>
+                    <Row wrap={true} justify="center" align="middle">
+                        {filteredListings.map((listing) => (
+                            <LeaseTile
+                                key={listing.id}
+                                listing={listing}
+                                user={user}
+                                favorited={checkFavorited(listing.id)}
+                                favorite={favorite}
+                                unFavorite={unFavorite}
+                            />
+                        ))}
+                    </Row>
+                </Col>
+            </Row>
         </div>
     );
 };

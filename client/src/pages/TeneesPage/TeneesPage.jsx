@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import TeneesAPI from "../../services/tenees.js";
 import TeneeTile from "../../components/TeneeTile.jsx";
 import { Link } from "react-router-dom";
-import { Button, Select, InputNumber, Form } from "antd";
+import { Button, Select, InputNumber, Form, Row, Col, Divider } from "antd";
 
 const { Option } = Select;
 
@@ -111,54 +111,95 @@ const TeneesPage = ({ api_url, user }) => {
 
     return (
         <div>
-            <h2>Welcome to the Tenees Page!</h2>
-            <Button style={{ color: "blue" }}>
-                <Link to="/tenee/create">Create Post</Link>
-            </Button>
-            <Form
-                form={filterForm}
-                layout="inline"
-                onFinish={handleFilterChange}
+            <Row
+                align="middle"
+                justify="space-around"
+                style={{ margin: "40px 0" }}
             >
-                <Form.Item name="gender" label="Gender">
-                    <Select style={{ width: 120 }}>
-                        <Option value="Male">Male</Option>
-                        <Option value="Female">Female</Option>
-                        <Option value="Non-Binary">Non-Binary</Option>
-                        <Option value="Other">Other</Option>
-                    </Select>
-                </Form.Item>
-                <Form.Item name="age_min" label="Min Age">
-                    <InputNumber />
-                </Form.Item>
-                <Form.Item name="age_max" label="Max Age">
-                    <InputNumber />
-                </Form.Item>
-                <Form.Item name="rent_min" label="Min Rent">
-                    <InputNumber />
-                </Form.Item>
-                <Form.Item name="rent_max" label="Max Rent">
-                    <InputNumber />
-                </Form.Item>
-                <Form.Item>
-                    <Button type="primary" htmlType="submit">
-                        Apply Filters
+                <Col>
+                    <h1 style={{ color: "#302C33" }}>Tenees Posts</h1>
+                </Col>
+                <Col>
+                    <Button className="button" type="none">
+                        <Link to="/tenee/create">CREATE POST</Link>
                     </Button>
-                    <Button onClick={resetFilters}>Reset Filters</Button>
-                </Form.Item>
-            </Form>
-            <div>
-                {filteredTenees.map((post) => (
-                    <TeneeTile
-                        key={post.id}
-                        tenee={post}
-                        user={user}
-                        favorited={checkFavorited(post.id)}
-                        favorite={favorite}
-                        unFavorite={unFavorite}
-                    />
-                ))}
-            </div>
+                </Col>
+            </Row>
+            <Divider />
+
+            <Row align="middle" justify="center">
+                <Col>
+                    <h2 style={{ color: "#6A4087" }}>Filter Posts:</h2>
+                    <Form
+                        form={filterForm}
+                        layout="inline"
+                        onFinish={handleFilterChange}
+                        style={{ margin: "20px 0px" }}
+                    >
+                        <Form.Item name="gender" label="Gender">
+                            <Select style={{ width: 120 }}>
+                                <Option value="Male">Male</Option>
+                                <Option value="Female">Female</Option>
+                                <Option value="Non-Binary">Non-Binary</Option>
+                                <Option value="Other">Other</Option>
+                            </Select>
+                        </Form.Item>
+                        <Form.Item name="age_min" label="Min Age">
+                            <InputNumber />
+                        </Form.Item>
+                        <Form.Item name="age_max" label="Max Age">
+                            <InputNumber />
+                        </Form.Item>
+                        <Form.Item name="rent_min" label="Min Rent">
+                            <InputNumber />
+                        </Form.Item>
+                        <Form.Item name="rent_max" label="Max Rent">
+                            <InputNumber />
+                        </Form.Item>
+                        <Form.Item>
+                            <Button
+                                type="none"
+                                htmlType="submit"
+                                className="button"
+                            >
+                                Apply Filters
+                            </Button>
+                        </Form.Item>
+                        <Form.Item>
+                            <Button
+                                type="none"
+                                onClick={resetFilters}
+                                className="button-inverse"
+                            >
+                                Reset Filters
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                </Col>
+            </Row>
+
+            <Divider />
+
+            <Row
+                justify="center"
+                align="middle"
+                style={{ marginBottom: "40px" }}
+            >
+                <Col span={22}>
+                    <Row wrap={true} justify="center" align="middle">
+                        {filteredTenees.map((post) => (
+                            <TeneeTile
+                                key={post.id}
+                                tenee={post}
+                                user={user}
+                                favorited={checkFavorited(post.id)}
+                                favorite={favorite}
+                                unFavorite={unFavorite}
+                            />
+                        ))}
+                    </Row>
+                </Col>
+            </Row>
         </div>
     );
 };

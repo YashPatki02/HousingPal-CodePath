@@ -73,15 +73,90 @@ const TeneeTile = ({ tenee, post, user, favorited, favorite, unFavorite }) => {
                     backgroundColor: "#f0f2f5",
                 }}
             >
-                <p>Name: {name}</p>
-                <p>University: {university}</p>
-                <p>Contact Info: {contact_info}</p>
-                <p>Gender: {gender}</p>
-                <p>Age: {age}</p>
-                <p>Bio: {bio}</p>
-                <p>
-                    Budget Range: ${budget_min} - ${budget_max}/month
-                </p>
+                <Col>
+                    <Row>
+                        <h2>Personal Info:</h2>
+                    </Row>
+                    <Row
+                        align="middle"
+                        justify="space-between"
+                        style={{ margin: "0px 10px" }}
+                    >
+                        <Col>
+                            <h3 style={{ color: "#302C33" }}>Name:</h3>
+                        </Col>
+                        <Col>
+                            <h3 className="tile-label">{name}</h3>
+                        </Col>
+                    </Row>
+                    <Row
+                        align="middle"
+                        justify="space-between"
+                        style={{ margin: "0px 10px" }}
+                    >
+                        <Col>
+                            <h3 style={{ color: "#302C33" }}>Contact Info:</h3>
+                        </Col>
+                        <Col>
+                            <h3 className="tile-label">{contact_info}</h3>
+                        </Col>
+                    </Row>
+                    <Row
+                        align="middle"
+                        justify="space-between"
+                        style={{ margin: "0px 10px" }}
+                    >
+                        <Col>
+                            <h3 style={{ color: "#302C33" }}>University:</h3>
+                        </Col>
+                        <Col>
+                            <h3 className="tile-label">{university}</h3>
+                        </Col>
+                    </Row>
+                    <Row
+                        align="middle"
+                        justify="space-between"
+                        style={{ margin: "0px 10px" }}
+                    >
+                        <Col>
+                            <h3 style={{ color: "#302C33" }}>Gender:</h3>
+                        </Col>
+                        <Col>
+                            <h3 className="tile-label">{gender}</h3>
+                        </Col>
+                    </Row>
+                    <Row
+                        align="middle"
+                        justify="space-between"
+                        style={{ margin: "0px 10px" }}
+                    >
+                        <Col>
+                            <h3 style={{ color: "#302C33" }}>Age:</h3>
+                        </Col>
+                        <Col>
+                            <h3 className="tile-label">{age}</h3>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <h2>Preferences:</h2>
+                    </Row>
+                    <Row
+                        align="middle"
+                        justify="space-between"
+                        style={{ margin: "0px 10px" }}
+                    >
+                        <Col>
+                            <h3 style={{ color: "#302C33" }}>
+                                Budget Range (monthly):
+                            </h3>
+                        </Col>
+                        <Col>
+                            <h3 className="tile-label">
+                                ${budget_min} - ${budget_max}/month
+                            </h3>
+                        </Col>
+                    </Row>
+                </Col>
             </Card>
         </div>
     );

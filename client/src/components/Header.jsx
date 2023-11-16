@@ -23,13 +23,13 @@ const Header = ({ logout, user }) => {
                 align="middle"
                 justify="space-between"
                 style={{
-                    backgroundColor: "#001529",
                     height: "80px",
                     padding: "0 20px",
+                    borderBottom: "1px solid #B6ADBC",
                 }}
             >
-                <Col style={{ color: "white" }}>
-                    <div className="logo">My Random Title</div>
+                <Col style={{ color: "#9511ED" }}>
+                    <h2 className="logo">HousingPal</h2>
                 </Col>
                 <Col span={12} justify="end" align="middle">
                     <Menu
@@ -41,7 +41,8 @@ const Header = ({ logout, user }) => {
                             justifyContent: "end",
                             width: "100%",
                             backgroundColor: "transparent",
-                            color: "white",
+                            color: "#9511ED",
+                            itemSelectedColor: "#302C33",
                         }}
                     >
                         <Menu.Item

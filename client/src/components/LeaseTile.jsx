@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { Button, Card } from "antd";
+import { Button, Card, Row, Col, Divider } from "antd";
 import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 import PostHeader from "./PostHeader";
 import "./Component.css";
@@ -82,9 +82,7 @@ const LeaseTile = ({
                 title={<PostHeader user={user} />}
                 extra={
                     <>
-                        <Button onClick={goToListing(id)}>
-                            View Listing Details
-                        </Button>
+                        <Button onClick={goToListing(id)}>View Details</Button>
                         {user_id !== user.id &&
                             (favorited ? (
                                 <Button onClick={() => unFavorite(id)}>
@@ -103,16 +101,150 @@ const LeaseTile = ({
                     backgroundColor: "#f0f2f5",
                 }}
             >
-                <p>Listing Type: {listing_type}</p>
-                <p>Tenants: {tenant_names}</p>
-                <p>Room Setup: {room_setup}</p>
-                <p>Preference Gender: {preference_gender}</p>
-                <p>Rent: ${rent}/month</p>
-                <p>Utilities: ${utilities ? utilities : "N/A"}/month</p>
-                <p>Lease Length: {lease_length} months</p>
-                <p>Start Date: {start_date}</p>
-                <p>Contact Info: {contact_info}</p>
-                <p>University: {university}</p>
+                <Col>
+                    <Row>
+                        <h2>Personal Info:</h2>
+                    </Row>
+                    <Row
+                        align="middle"
+                        justify="space-between"
+                        style={{ margin: "0px 10px" }}
+                    >
+                        <Col>
+                            <h3 style={{ color: "#302C33" }}>Contact Info:</h3>
+                        </Col>
+                        <Col>
+                            <h3 className="tile-label">{contact_info}</h3>
+                        </Col>
+                    </Row>
+                    <Row
+                        align="middle"
+                        justify="space-between"
+                        style={{ margin: "0px 10px" }}
+                    >
+                        <Col>
+                            <h3 style={{ color: "#302C33" }}>University:</h3>
+                        </Col>
+                        <Col>
+                            <h3 className="tile-label">{university}</h3>
+                        </Col>
+                    </Row>
+                    <Row
+                        align="middle"
+                        justify="space-between"
+                        style={{ margin: "0px 10px" }}
+                    >
+                        <Col>
+                            <h3 style={{ color: "#302C33" }}>Tenant Names:</h3>
+                        </Col>
+                        <Col>
+                            <h3 className="tile-label">{tenant_names}</h3>
+                        </Col>
+                    </Row>
+
+                    <Divider style={{ margin: "10px 0px" }} />
+
+                    <Row>
+                        <h2>Lease Info:</h2>
+                    </Row>
+                    <Row
+                        align="middle"
+                        justify="space-between"
+                        style={{ margin: "0px 10px" }}
+                    >
+                        <Col>
+                            <h3 style={{ color: "#302C33" }}>Lease Type:</h3>
+                        </Col>
+                        <Col>
+                            <h3 className="tile-label">{listing_type}</h3>
+                        </Col>
+                    </Row>
+                    <Row
+                        align="middle"
+                        justify="space-between"
+                        style={{ margin: "0px 10px" }}
+                    >
+                        <Col>
+                            <h3 style={{ color: "#302C33" }}>Room Type:</h3>
+                        </Col>
+                        <Col>
+                            <h3 className="tile-label">{room_setup}</h3>
+                        </Col>
+                    </Row>
+                    <Row
+                        align="middle"
+                        justify="space-between"
+                        style={{ margin: "0px 10px" }}
+                    >
+                        <Col>
+                            <h3 style={{ color: "#302C33" }}>
+                                Gender Preference:
+                            </h3>
+                        </Col>
+                        <Col>
+                            <h3 className="tile-label">{preference_gender}</h3>
+                        </Col>
+                    </Row>
+
+                    <Divider style={{ margin: "10px 0px" }} />
+
+                    <Row
+                        align="middle"
+                        justify="space-between"
+                        style={{ margin: "0px 10px" }}
+                    >
+                        <Col>
+                            <h3 style={{ color: "#302C33" }}>
+                                Rent (monthly):
+                            </h3>
+                        </Col>
+                        <Col>
+                            <h3 className="tile-label">${rent}/month</h3>
+                        </Col>
+                    </Row>
+                    <Row
+                        align="middle"
+                        justify="space-between"
+                        style={{ margin: "0px 10px" }}
+                    >
+                        <Col>
+                            <h3 style={{ color: "#302C33" }}>
+                                Utilities (monthly):
+                            </h3>
+                        </Col>
+                        <Col>
+                            <h3 className="tile-label">${utilities}/month</h3>
+                        </Col>
+                    </Row>
+                    <Row
+                        align="middle"
+                        justify="space-between"
+                        style={{ margin: "0px 10px" }}
+                    >
+                        <Col>
+                            <h3 style={{ color: "#302C33" }}>
+                                Lease Length (months):
+                            </h3>
+                        </Col>
+                        <Col>
+                            <h3 className="tile-label">{lease_length} months</h3>
+                        </Col>
+                    </Row>
+                    <Row
+                        align="middle"
+                        justify="space-between"
+                        style={{ margin: "0px 10px" }}
+                    >
+                        <Col>
+                            <h3 style={{ color: "#302C33" }}>
+                                Desired Start Date:
+                            </h3>
+                        </Col>
+                        <Col>
+                            <h3 className="tile-label">{start_date.substring(0, 10)}</h3>
+                        </Col>
+                    </Row>
+                </Col>
             </Card>
         </div>
     );

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import LeaseTile from "../../components/LeaseTile";
 import TeneeTile from "../../components/TeneeTile";
+import {Row, Col} from 'antd'
 
 const UserProfile = ({ user }) => {
     const [listings, setListings] = useState([]);

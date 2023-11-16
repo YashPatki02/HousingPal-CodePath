@@ -3,3 +3,82 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+.button {
+    background-color: #9511ed;
+    color: white;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: white;
+    color: #9511ed;
+    border: 1px solid #9511ed;
+    cursor: pointer;
+}
+
+.button-inverse {
+    background-color: white;
+    color: #9511ed;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #9511ed;
+    border-radius: 5px;
+}
+
+.button-inverse:hover {
+    background-color: #9511ed;
+    color: white;
+    cursor: pointer;
+}
+
+.tile-label {
+    color: #6a4087;
+    font-weight: bold;
+}
+
+.form-container {
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-label {
+    width: 300px;
+    margin-bottom: 10px;
+    color: #6a4087;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    appearance: none;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-left: 20px;
+}

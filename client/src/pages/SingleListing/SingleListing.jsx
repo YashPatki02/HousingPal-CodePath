@@ -1,96 +1,6 @@
-// import React, { useEffect, useState } from "react";
-// import { useNavigate, useParams } from "react-router";
-
-// const Listing = ({ user }) => {
-//     const { id } = useParams();
-//     const [listing, setListing] = useState(null);
-//     const [isOwner, setIsOwner] = useState(false);
-//     const navigate = useNavigate();
-
-//     useEffect(() => {
-//         const fetchListing = async () => {
-//             try {
-//                 const response = await fetch(
-//                     `http://localhost:3001/api/leases/${id}`
-//                 );
-//                 const data = await response.json();
-//                 setListing(data);
-//             } catch (error) {
-//                 console.error("Error fetching listing: ", error);
-//             }
-//         };
-
-//         fetchListing();
-//     }, [id]);
-
-//     useEffect(() => {
-//         if (listing) {
-//             setIsOwner(listing.user_id === user.id);
-//         }
-//     }, [listing]);
-
-
-//     const deleteListing = (id) => async () => {
-//         try {
-//             const response = await fetch(
-//                 `http://localhost:3001/api/leases/${id}`,
-//                 {
-//                     method: "DELETE",
-//                 }
-//             );
-//             const data = await response.json();
-//         } catch (error) {
-//             console.error("Error deleting listing: ", error);
-//         } finally {
-//             navigate("/");
-//         }
-//     };
-
-//     return (
-//         <div>
-//             <h2>Listing</h2>
-
-//             <div className="lease-tile">
-//                 <h2>{listing && listing.listing_type} Listing</h2>
-//                 <p>Tenants: {listing && listing.tenant_names}</p>
-//                 <p>Room Setup: {listing && listing.room_setup}</p>
-//                 <p>Appliances: {listing && listing.appliances}</p>
-//                 <p>Amenities: {listing && listing.amenities}</p>
-//                 <p>Preference Gender: {listing && listing.preference_gender}</p>
-//                 <p>Other Preferences: {listing && listing.other_preferences}</p>
-//                 <p>Deal Breakers: {listing && listing.deal_breakers}</p>
-//                 <p>Location: {listing && listing.location}</p>
-//                 <p>Rent: ${listing && listing.rent}/month</p>
-//                 <p>
-//                     Utilities: $
-//                     {listing && listing.utilities ? listing.utilities : "N/A"}
-//                     /month
-//                 </p>
-//                 <p>Lease Length: {listing && listing.lease_length} months</p>
-//                 <p>Start Date: {listing && listing.start_date}</p>
-//                 <p>Contact Info: {listing && listing.contact_info}</p>
-//                 <p>Posted By: {listing && listing.user_id}</p>
-//                 <p>University: {listing && listing.university}</p>
-//             </div>
-
-//             {isOwner && (
-//                 <>
-//                     <button onClick={() => navigate(`/listing/edit/${id}`)}>
-//                         Edit Listing
-//                     </button>
-//                     <button onClick={() => deleteListing(id)}>
-//                         Delete Listing
-//                     </button>
-//                 </>
-//             )}
-//         </div>
-//     );
-// };
-
-// export default Listing;
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { Button, Card, Result, Space, Spin, Row, Col } from "antd";
+import { Button, Result, Spin, Row, Col, Divider } from "antd";
 
 const Listing = ({ user }) => {
     const { id } = useParams();
@@ -110,6 +20,7 @@ const Listing = ({ user }) => {
                 setLoading(false);
             } catch (error) {
                 console.error("Error fetching listing: ", error);
+                setLoading(false);
             }
         };
 
@@ -120,7 +31,7 @@ const Listing = ({ user }) => {
         if (listing) {
             setIsOwner(listing.user_id === user.id);
         }
-    }, [listing]);
+    }, [listing, user.id]);
 
     const deleteListing = async (id) => {
         try {
@@ -137,134 +48,354 @@ const Listing = ({ user }) => {
         }
     };
 
+    if (loading) return <Spin />;
+
     return (
-        <div>
-            <h2>Listing</h2>
-
-            {loading && <Spin size="large" />}
-
-            {!loading && listing ? (
-                <Card title={listing.listing_type} bordered={false}>
-                    <Space direction="vertical" size={20}>
-                        <Row gutter={16}>
-                            <Col span={8}>
-                                <h3>Tenants:</h3>
-                                <p>{listing.tenant_names}</p>
-                            </Col>
-                            <Col span={8}>
-                                <h3>Room Setup:</h3>
-                                <p>{listing.room_setup}</p>
-                            </Col>
-                            <Col span={8}>
-                                <h3>Appliances:</h3>
-                                <p>{listing.appliances}</p>
-                            </Col>
+        <Row align="middle" justify="center">
+            <Col span={22}>
+                <Row
+                    justify="space-around"
+                    align="middle"
+                    style={{ margin: "40px 0px" }}
+                >
+                    <h1>Listing</h1>
+                    {isOwner && (
+                        <Row>
+                            <Button
+                                type="none"
+                                className="button"
+                                onClick={() => navigate(`/listing/edit/${id}`)}
+                                style={{ marginRight: "10px" }}
+                            >
+                                Edit Listing
+                            </Button>
+                            <Button
+                                type="none"
+                                className="button-inverse"
+                                onClick={() => deleteListing(id)}
+                                style={{ marginLeft: "10px" }}
+                            >
+                                Delete Listing
+                            </Button>
                         </Row>
+                    )}
+                </Row>
 
-                        <Row gutter={16}>
-                            <Col span={8}>
-                                <h3>Amenities:</h3>
-                                <p>{listing.amenities}</p>
-                            </Col>
-                            <Col span={8}>
-                                <h3>Preference Gender:</h3>
-                                <p>{listing.preference_gender}</p>
-                            </Col>
-                        </Row>
-
-                        <Row gutter={16}>
-                            <Col span={8}>
-                                <h3>Other Preferences:</h3>
-                                <p>{listing.other_preferences}</p>
-                            </Col>
-                            <Col span={8}>
-                                <h3>Deal Breakers:</h3>
-                                <p>{listing.deal_breakers}</p>
-                            </Col>
-                            <Col span={8}>
-                                <h3>Location:</h3>
-                                <p>{listing.location}</p>
-                            </Col>
-                        </Row>
-
-                        <Row gutter={16}>
-                            <Col span={8}>
-                                <h3>Rent:</h3>
-                                <p>${listing.rent}/month</p>
-                            </Col>
-                            <Col span={8}>
-                                <h3>Utilities:</h3>
-                                <p>
-                                    $
-                                    {listing.utilities
-                                        ? listing.utilities
-                                        : "N/A"}
-                                    /month
-                                </p>
-                            </Col>
-                            <Col span={8}>
-                                <h3>Lease Length:</h3>
-                                <p>{listing.lease_length} months</p>
-                            </Col>
-                        </Row>
-
-                        <Row gutter={16}>
-                            <Col span={8}>
-                                <h3>Start Date:</h3>
-                                <p>{listing.start_date}</p>
-                            </Col>
-                            <Col span={8}>
-                                <h3>Contact Info:</h3>
-                                <p>{listing.contact_info}</p>
-                            </Col>
-                            <Col span={8}>
-                                <h3>Posted By:</h3>
-                                <p>{listing.user_id}</p>
-                            </Col>
-                        </Row>
-
-                        <Row gutter={16}>
-                            <Col span={8}>
-                                <h3>University:</h3>
-                                <p>{listing.university}</p>
-                            </Col>
-                        </Row>
-
-                        {isOwner && (
-                            <div>
-                                <Button
-                                    type="primary"
-                                    onClick={() =>
-                                        navigate(`/listing/edit/${id}`)
-                                    }
+                {!loading && listing ? (
+                    <>
+                        <Row align="start" justify="center" gutter="20px">
+                            {/* Personal Info */}
+                            <Col flex={6} style={{ margin: "0px 20px" }}>
+                                <Row style={{ margin: "20px 0px" }}>
+                                    <h2>Personal Info:</h2>
+                                </Row>
+                                <Divider />
+                                <Row
+                                    align="middle"
+                                    justify="space-between"
+                                    style={{ margin: "0px 10px" }}
                                 >
-                                    Edit Listing
-                                </Button>
-                                <Button
-                                    type="danger"
-                                    onClick={() => deleteListing(id)}
+                                    <Col>
+                                        <h3 style={{ color: "#302C33" }}>
+                                            Contact Info:
+                                        </h3>
+                                    </Col>
+                                    <Col>
+                                        <h3 className="tile-label">
+                                            {listing.contact_info}
+                                        </h3>
+                                    </Col>
+                                </Row>
+                                <Row
+                                    align="middle"
+                                    justify="space-between"
+                                    style={{ margin: "0px 10px" }}
                                 >
-                                    Delete Listing
-                                </Button>
-                            </div>
-                        )}
-                    </Space>
-                </Card>
-            ) : (
-                <Result
-                    status="404"
-                    title="Listing Not Found"
-                    subTitle="Sorry, the listing you are looking for does not exist."
-                    extra={
-                        <Button type="primary" onClick={() => navigate("/")}>
-                            Back to Home
-                        </Button>
-                    }
-                />
-            )}
-        </div>
+                                    <Col>
+                                        <h3 style={{ color: "#302C33" }}>
+                                            University:
+                                        </h3>
+                                    </Col>
+                                    <Col>
+                                        <h3 className="tile-label">
+                                            {listing.university}
+                                        </h3>
+                                    </Col>
+                                </Row>
+                                <Row
+                                    align="middle"
+                                    justify="space-between"
+                                    style={{ margin: "0px 10px" }}
+                                >
+                                    <Col>
+                                        <h3 style={{ color: "#302C33" }}>
+                                            Tenant Names:
+                                        </h3>
+                                    </Col>
+                                    <Col>
+                                        <h3 className="tile-label">
+                                            {listing.tenant_names}
+                                        </h3>
+                                    </Col>
+                                </Row>
+                            </Col>
+                            {/* Lease Info*/}
+                            <Col flex={6} style={{ margin: "0px 20px" }}>
+                                <Row style={{ margin: "20px 0px" }}>
+                                    <h2>Lease Info:</h2>
+                                </Row>
+                                <Divider />
+                                <Row
+                                    align="middle"
+                                    justify="space-between"
+                                    style={{ margin: "0px 10px" }}
+                                >
+                                    <Col>
+                                        <h3 style={{ color: "#302C33" }}>
+                                            Lease Type:
+                                        </h3>
+                                    </Col>
+                                    <Col>
+                                        <h3 className="tile-label">
+                                            {listing.listing_type}
+                                        </h3>
+                                    </Col>
+                                </Row>
+                                <Row
+                                    align="middle"
+                                    justify="space-between"
+                                    style={{ margin: "0px 10px" }}
+                                >
+                                    <Col>
+                                        <h3 style={{ color: "#302C33" }}>
+                                            Room Type:
+                                        </h3>
+                                    </Col>
+                                    <Col>
+                                        <h3 className="tile-label">
+                                            {listing.room_setup}
+                                        </h3>
+                                    </Col>
+                                </Row>
+                                <Row
+                                    align="middle"
+                                    justify="space-between"
+                                    style={{ margin: "0px 10px" }}
+                                >
+                                    <Col>
+                                        <h3 style={{ color: "#302C33" }}>
+                                            Gender Preferences:
+                                        </h3>
+                                    </Col>
+                                    <Col>
+                                        <h3 className="tile-label">
+                                            {listing.preference_gender}
+                                        </h3>
+                                    </Col>
+                                </Row>
+                                <Row
+                                    align="middle"
+                                    justify="space-between"
+                                    style={{ margin: "0px 10px" }}
+                                >
+                                    <Col>
+                                        <h3 style={{ color: "#302C33" }}>
+                                            Location
+                                        </h3>
+                                    </Col>
+                                    <Col>
+                                        <h3 className="tile-label">
+                                            {listing.location}
+                                        </h3>
+                                    </Col>
+                                </Row>
+                                <Row
+                                    align="middle"
+                                    justify="space-between"
+                                    style={{ margin: "0px 10px" }}
+                                >
+                                    <Col>
+                                        <h3 style={{ color: "#302C33" }}>
+                                            Rent (monthly):
+                                        </h3>
+                                    </Col>
+                                    <Col>
+                                        <h3 className="tile-label">
+                                            ${listing.rent}/month
+                                        </h3>
+                                    </Col>
+                                </Row>
+                                <Row
+                                    align="middle"
+                                    justify="space-between"
+                                    style={{ margin: "0px 10px" }}
+                                >
+                                    <Col>
+                                        <h3 style={{ color: "#302C33" }}>
+                                            Utilities (monthly):
+                                        </h3>
+                                    </Col>
+                                    <Col>
+                                        <h3 className="tile-label">
+                                            ${listing.utilities}/month
+                                        </h3>
+                                    </Col>
+                                </Row>
+                                <Row
+                                    align="middle"
+                                    justify="space-between"
+                                    style={{ margin: "0px 10px" }}
+                                >
+                                    <Col>
+                                        <h3 style={{ color: "#302C33" }}>
+                                            Lease Length (months):
+                                        </h3>
+                                    </Col>
+                                    <Col>
+                                        <h3 className="tile-label">
+                                            {listing.lease_length} months
+                                        </h3>
+                                    </Col>
+                                </Row>
+                                <Row
+                                    align="middle"
+                                    justify="space-between"
+                                    style={{ margin: "0px 10px" }}
+                                >
+                                    <Col>
+                                        <h3 style={{ color: "#302C33" }}>
+                                            Dersired Start Date:
+                                        </h3>
+                                    </Col>
+                                    <Col>
+                                        <h3 className="tile-label">
+                                            {listing.start_date.substring(
+                                                0,
+                                                10
+                                            )}
+                                        </h3>
+                                    </Col>
+                                </Row>
+                            </Col>
+                            {/* Amenities and Appliances */}
+                            <Col flex={6} style={{ margin: "0px 20px" }}>
+                                <Row style={{ margin: "20px 0px" }}>
+                                    <h2>Amenities and Appliances:</h2>
+                                </Row>
+                                <Divider />
+                                <Row
+                                    align="start"
+                                    justify="space-between"
+                                    style={{ margin: "10px 0 10px 10px" }}
+                                >
+                                    <Col>
+                                        <h3 style={{ color: "#302C33" }}>
+                                            Amenities
+                                        </h3>
+                                    </Col>
+                                    <Col>
+                                        <Row
+                                            wrap={true}
+                                            style={{ maxWidth: "200px" }}
+                                        >
+                                            <h3 className="tile-label">
+                                                {listing.amenities === ""
+                                                    ? "None Listed"
+                                                    : listing.amenities}
+                                            </h3>
+                                        </Row>
+                                    </Col>
+                                </Row>
+                                <Row
+                                    align="start"
+                                    justify="space-between"
+                                    style={{ margin: "10px 0 10px 10px" }}
+                                >
+                                    <Col>
+                                        <h3 style={{ color: "#302C33" }}>
+                                            Appliances
+                                        </h3>
+                                    </Col>
+                                    <Col>
+                                        <Row
+                                            wrap={true}
+                                            style={{ maxWidth: "200px" }}
+                                        >
+                                            <h3 className="tile-label">
+                                                {listing.appliances === ""
+                                                    ? "None Listed"
+                                                    : listing.appliances}
+                                            </h3>
+                                        </Row>
+                                    </Col>
+                                </Row>
+                            </Col>
+                        </Row>
+
+                        {/* Preferences */}
+                        <Row style={{ margin: "20px 0px" }}>
+                            <h2>Preferences:</h2>
+                        </Row>
+                        <Divider />
+                        <Row
+                            align="middle"
+                            justify="space-between"
+                            style={{ margin: "10px 0 10px 10px" }}
+                        >
+                            <Col>
+                                <h3 style={{ color: "#302C33" }}>
+                                    Other Preferences:
+                                </h3>
+                            </Col>
+                            <Col>
+                                <Row wrap={true} style={{ maxWidth: "200px" }}>
+                                    <h3 className="tile-label">
+                                        {listing.other_preferences === ""
+                                            ? "None Listed"
+                                            : listing.other_preferences}
+                                    </h3>
+                                </Row>
+                            </Col>
+                        </Row>
+                        <Row
+                            align="middle"
+                            justify="space-between"
+                            style={{ margin: "10px 0 10px 10px" }}
+                        >
+                            <Col>
+                                <h3 style={{ color: "#302C33" }}>
+                                    Deal Breakers:
+                                </h3>
+                            </Col>
+                            <Col>
+                                <Row wrap={true} style={{ maxWidth: "200px" }}>
+                                    <h3 className="tile-label">
+                                        {listing.deal_breakers === ""
+                                            ? "None Listed"
+                                            : listing.deal_breakers}
+                                    </h3>
+                                </Row>
+                            </Col>
+                        </Row>
+                    </>
+                ) : (
+                    <Result
+                        status="404"
+                        title="Listing Not Found"
+                        subTitle="Sorry, the listing you are looking for does not exist."
+                        extra={
+                            <Button
+                                type="primary"
+                                onClick={() => navigate("/")}
+                            >
+                                Back to Home
+                            </Button>
+                        }
+                    />
+                )}
+            </Col>
+        </Row>
     );
 };
 
 export default Listing;
-
