@@ -30,98 +30,102 @@ Backend: Node.js, Express.js, Passport.js, PostgreSQL
 
 ## Features
 
-### 1. Users can Create an Account
+### 1. Users Table on the Database
 
-- [ ] Users can create an account using their school email address and password (``Register`` page).
-- [ ] Users can login using their school email address and password (``Login`` page).
-- [ ] Users can logout of their account (``Logout`` button in User Profile page).
-- [ ] Users can update their profile information in the ``User Profile`` page.
+✅ Users table is created on the database (GitHub Info).
 
-[gif goes here]
+![Users Table](../web103_finalproject/gifs/1.users-table.gif)
 
 ### 2. Users (Tenants) can Post a Listing for a Lease/Sublease
 
-- [ ] Users can post a listing for a sublet/sublease or lease/roomate.
-- [ ] Each Sublease/Lease listing includes:
-  - [ ] Type of listing (sublease/sublet or lease/roommate)
-  - [ ] Name(s) of the tenant(s)
-  - [ ] Preferences/Criteria for new tenant/roommate
-  - [ ] Location/Community
-  - [ ] Cost
-  - [ ] Lease/Sublease Duration
-  - [ ] Pictures of the property
-  - [ ] Contact information
-  - [ ] Other details
-- [ ] Users can edit/delete their own listings.
-- [ ] All users can view all listings.
-- [ ] Users can filter through listings based on preferences/criteria.
+✅ Users can post a listing for a sublet/sublease or lease/roomate.
+✅ Users can only edit/delete their own listings.
+✅ All users can view all listings.
+✅ Users can click on individual listings to view more details.
 
-
-[gif goes here]
+![Post Listing](../web103_finalproject/gifs/2.create-lease-listing.gif)
 
 ### 3. Users (Looking for Housing) can Post Profile
 
-- [ ] Users can post a profile for themselves if they are looking for housing.
-- [ ] Each profile includes:
-  - [ ] Name
-  - [ ] Bio (age, major, etc.)
-  - [ ] Preferences/Criteria for housing
-  - [ ] Hobbies/Interests
-  - [ ] Budget Range
-  - [ ] Image of the user
-  - [ ] Contact information
-  - [ ] Other details
-- [ ] Users can edit/delete their own profiles.
-- [ ] All users can view all profiles.
-- [ ] Users can filter through profiles based on preferences/criteria.
+✅ Users can post a profile for themselves if they are looking for housing.
+✅ Users can only edit/delete their own profiles.
+✅ All users can view all profiles.
+✅ Users can click on individual profiles to view more details.
 
-[gif goes here]
+![Post Profile](../web103_finalproject/gifs/3.create-profile.gif)
 
-### 4. All Users can switch between the Listings and Profiles pages
+### 4. All Users can switch between the Listings, Profiles, Favorites, and User Profile pages
 
-- [ ] Users can switch between the Listings and Profiles pages using the navigation bar.
+✅ Users can switch between the Listings, Profiles, Favorites, and User Profile pages using the navigation bar.
 
-[gif goes here]
+![Navigation Bar](../web103_finalproject/gifs/4.routing.gif)
 
 ### 5. Users can filter Listings and Profiles
 
-- [ ] Users can filter Listings and Profiles by:
-  - [ ] Location
-  - [ ] Cost
-  - [ ] Duration
-  - [ ] Preferences/Criteria
-  - [ ] Other details
+✅ Users can filter Listings and Profiles by:
+  - [x] Cost
+  - [x] Preferences/Criteria
+  - [x] Other details
 
-[gif goes here]
+![Filtering Listings and Profiles](../web103_finalproject/gifs/5.filtering.gif)
 
 ### 6. Users have basic CRUD functionality for Listings and Profiles
 
-- [ ] Users can create, read, update, and delete Listings and Profiles.
+✅ Users can create, read, update, and delete Listings.
 
-![Routing Basics](gifs/routing-frontend.gif)
+![CRUD Listings](../web103_finalproject/gifs/6a.crud-listings.gif)
+
+✅ Users can create, read, update, and delete Profiles.
+
+![CRUD Profiles](../web103_finalproject/gifs/6b.crud-profiles.gif)
+
 
 ### 7. Users can view their own Listings and Profiles in their User Profile page
 
-- [ ] Users can view their own Listings and Profiles in their ``User Profile`` page.
+✅ Users can view their own Listings and Profiles in their ``User Profile`` page.
 
-[gif goes here]
+![User Profile](../web103_finalproject/gifs/7.user-profile.gif)
 
 ### 8. Users can favorite Listings and Profiles
 
-- [ ] Users can favorite Listings and Profiles.
-- [ ] Users can view their favorited Listings and Profiles in the ``Favorites`` page.
+✅ Users can favorite Listings and Profiles that are not created by them.
+✅ Users can view their favorited Listings and Profiles in the ``Favorites`` page.
 
-[gif goes here]
+![Favoriting Listings and Profiles](../web103_finalproject/gifs/8.favorite.gif)
 
 ### 9. All data is persisted in a PostgreSQL database using Railway
 
-- ✅ Create and connect to a PostgreSQL database using Railway.
-- ✅ All data is persisted in a PostgreSQL database using Railway.
-- [ ] API routes are setup in the backend to handle CRUD operations.
+✅ Create and connect to a PostgreSQL database using Railway.
+✅ All data is persisted in a PostgreSQL database using Railway.
+✅ API routes are setup in the backend to handle CRUD operations.
 
 Server Setup:
-![Server Setup]('../../gifs/server-setup.gif)
+![Server Setup]('../../gifs/9.server-setup.gif)
 
 ## Installation Instructions
 
-[instructions go here]
+### 1. Clone the repository
+
+```
+git clone
+```
+
+### 2. Install dependencies
+
+```
+npm install
+```
+
+### 3. Start the server
+
+```
+npm run start
+```
+
+### 4. Start the client
+
+```
+npm run dev
+```
+
+Note: Need to setup your own database using Railway and update the ``.env`` file with your own credentials.

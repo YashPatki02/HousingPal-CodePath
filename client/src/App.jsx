@@ -14,6 +14,7 @@ import ListingEdit from "./pages/ListingEdit/ListingEdit";
 import TeneeEdit from "./pages/TeneeEdit/TeneeEdit";
 
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 import "./App.css";
 
